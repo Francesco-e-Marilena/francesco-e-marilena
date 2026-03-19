@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Francesco & Marilena — 17 Giugno 2027</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf8f5;
+      --gold: #c4956a;
+      --gold-light: #e8d5c8;
+      --brown-dark: #2c2220;
+      --brown-mid: #6b5548;
+      --brown-light: #8a7060;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--brown-dark);
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(253,248,245,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--gold-light);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    nav a {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--brown-light); text-decoration: none;
+      padding: 16px 16px; border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .hero {
+      text-align: center; padding: 5rem 2rem 4rem;
+      background: linear-gradient(160deg, #f9ede6 0%, var(--cream) 65%);
+      border-bottom: 0.5px solid var(--gold-light);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: ''; position: absolute; top: -80px; left: 50%;
+      transform: translateX(-50%); width: 420px; height: 420px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(242,196,168,0.18) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-label {
+      font-size: 10px; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
+    }
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 10vw, 62px);
+      font-weight: 300; font-style: italic; color: var(--brown-dark);
+      line-height: 1.1; opacity: 0; animation: fadeUp 0.8s ease forwards 0.25s;
+    }
+    .hero-amp { color: var(--gold); }
+    .hero-date {
+      font-size: 11px; letter-spacing: 4px; color: var(--brown-light);
+      text-transform: uppercase; margin-top: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+    .countdown {
+      display: flex; justify-content: center; gap: 2rem; margin-top: 2.5rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.55s;
+    }
+    .countdown-item { text-align: center; }
+    .countdown-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 36px;
+      font-weight: 300; color: var(--gold); line-height: 1; display: block;
+    }
+    .countdown-label {
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--brown-light); margin-top: 4px;
+    }
+
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 2.5rem; margin: 2.5rem 0;
+    }
+    .div-line { flex: 1; height: 0.5px; background: var(--gold-light); }
+    .div-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
+
+    section { padding: 3rem 2.5rem 1rem; scroll-margin-top: 60px; }
+
+    .section-label {
+      font-size: 10px; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.4rem; text-align: center;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 32px;
+      font-weight: 300; font-style: italic; color: var(--brown-dark);
+      text-align: center; margin-bottom: 1.5rem;
+    }
+    .body-text {
+      font-size: 15px; color: var(--brown-mid); line-height: 1.9;
+      text-align: center; max-width: 520px; margin: 0 auto;
+    }
+
+    .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 1.5rem; }
+    .card {
+      background: var(--white); border: 0.5px solid var(--gold-light);
+      border-radius: 14px; padding: 1.8rem 1.2rem; text-align: center;
+    }
+    .card-icon { color: var(--gold); font-size: 18px; margin-bottom: 10px; opacity: 0.8; }
+    .card-title {
+      font-family: 'Cormorant Garamond', serif; font-size: 18px;
+      font-style: italic; color: var(--brown-dark); margin-bottom: 6px;
+    }
+    .card-body { font-size: 13px; color: var(--brown-light); line-height: 1.7; }
+    .card-link {
+      display: inline-block; margin-top: 10px; font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--gold); text-decoration: none;
+      border-bottom: 0.5px solid var(--gold-light); padding-bottom: 1px;
+      transition: border-color 0.2s;
+    }
+    .card-link:hover { border-color: var(--gold); }
+
+    .timeline { margin-top: 1.5rem; }
+    .tl-item { display: flex; gap: 18px; margin-bottom: 1.4rem; align-items: flex-start; }
+    .tl-time {
+      font-size: 12px; letter-spacing: 1px; color: var(--gold);
+      min-width: 48px; text-align: right; padding-top: 2px;
+    }
+    .tl-track { display: flex; flex-direction: column; align-items: center; }
+    .tl-dot {
+      width: 9px; height: 9px; border-radius: 50%;
+      background: var(--cream); border: 1.5px solid var(--gold);
+      flex-shrink: 0; margin-top: 4px;
+    }
+    .tl-wire { width: 0.5px; flex: 1; min-height: 28px; background: var(--gold-light); }
+    .tl-content { flex: 1; padding-bottom: 12px; }
+    .tl-label { font-size: 14px; font-weight: 400; color: var(--brown-dark); margin-bottom: 2px; }
+    .tl-desc { font-size: 13px; color: var(--brown-light); }
+
+    .rsvp-box {
+      background: var(--white); border: 0.5px solid var(--gold-light);
+      border-radius: 18px; padding: 2.5rem 2rem; margin-top: 1.5rem;
+    }
+    .rsvp-box input, .rsvp-box select, .rsvp-box textarea {
+      width: 100%; border: 0.5px solid var(--gold-light); border-radius: 8px;
+      padding: 11px 14px; font-family: 'Jost', sans-serif; font-size: 14px;
+      font-weight: 300; color: var(--brown-dark); background: var(--cream);
+      margin-bottom: 12px; outline: none; transition: border-color 0.2s; appearance: none;
+    }
+    .rsvp-box input:focus, .rsvp-box select:focus, .rsvp-box textarea:focus { border-color: var(--gold); }
+    .rsvp-box textarea { resize: vertical; min-height: 80px; }
+    .rsvp-btn {
+      background: var(--gold); color: var(--white); border: none; border-radius: 8px;
+      padding: 14px 32px; font-family: 'Jost', sans-serif; font-weight: 300;
+      font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+      cursor: pointer; width: 100%; transition: background 0.2s, transform 0.1s;
+    }
+    .rsvp-btn:hover { background: #b0804f; }
+    .rsvp-btn:active { transform: scale(0.99); }
+    .rsvp-success {
+      display: none; text-align: center; padding: 1.5rem;
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+      font-size: 22px; color: var(--gold);
+    }
+
+    .regalo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 1.5rem; }
+    .regalo-card {
+      background: var(--white); border: 0.5px solid var(--gold-light);
+      border-radius: 14px; padding: 1.8rem 1.2rem; text-align: center;
+    }
+    .regalo-name {
+      font-family: 'Cormorant Garamond', serif; font-size: 20px;
+      font-style: italic; color: var(--brown-dark); margin-bottom: 4px;
+    }
+    .regalo-iban { font-size: 11px; color: var(--brown-light); letter-spacing: 0.5px; margin-bottom: 14px; word-break: break-all; }
+    .qr-wrap { display: flex; justify-content: center; margin: 0 auto; }
+    .regalo-note { font-size: 11px; color: var(--brown-light); margin-top: 10px; font-style: italic; }
+
+    footer {
+      text-align: center; padding: 3rem 2rem 2rem;
+      border-top: 0.5px solid var(--gold-light); margin-top: 2rem;
+    }
+    .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-style: italic; color: var(--gold); opacity: 0.8; }
+    .footer-sub { font-size: 10px; letter-spacing: 3px; color: var(--brown-light); text-transform: uppercase; margin-top: 6px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 500px) {
+      .cards, .regalo-grid { grid-template-columns: 1fr; }
+      nav a { padding: 12px 10px; font-size: 9px; letter-spacing: 2px; }
+      .hero { padding: 3.5rem 1.5rem 3rem; }
+      section { padding: 2.5rem 1.5rem 1rem; }
+      .countdown { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#storia">Storia</a>
+  <a href="#location">Location</a>
+  <a href="#programma">Programma</a>
+  <a href="#rsvp">RSVP</a>
+  <a href="#regalo">Regalo</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-label">Si sposano</p>
+  <h1 class="hero-names">Francesco <span class="hero-amp">&</span> Marilena</h1>
+  <p class="hero-date">17 Giugno 2027 &nbsp;·&nbsp; Sicilia</p>
+  <div class="countdown">
+    <div class="countdown-item"><span class="countdown-num" id="cd-days">—</span><span class="countdown-label">Giorni</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-hours">—</span><span class="countdown-label">Ore</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-mins">—</span><span class="countdown-label">Minuti</span></div>
+    <div class="countdown-item"><span class="countdown-num" id="cd-secs">—</span><span class="countdown-label">Secondi</span></div>
+  </div>
+</div>
+
+<section id="storia">
+  <p class="section-label">La nostra storia</p>
+  <h2 class="section-title">Come tutto è iniziato</h2>
+  <p class="body-text">
+    Ci siamo incontrati per caso, ma l'amore non è mai davvero un caso.
+    Dopo anni di avventure, risate e sogni condivisi, abbiamo scelto di
+    celebrare la nostra storia nel luogo più bello del mondo — la nostra Sicilia.
+    Vi aspettiamo per condividere con voi il giorno più bello della nostra vita.
+  </p>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<section id="location">
+  <p class="section-label">Dove ci troverete</p>
+  <h2 class="section-title">Le location</h2>
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">✦</div>
+      <p class="card-title">La cerimonia</p>
+      <p class="card-body">Duomo di Ortigia<br>Piazza Duomo, Siracusa</p>
+      <a class="card-link" href="https://maps.google.com/?q=Duomo+di+Ortigia+Siracusa" target="_blank">Apri mappa</a>
+    </div>
+    <div class="card">
+      <div class="card-icon">✦</div>
+      <p class="card-title">Il ricevimento</p>
+      <p class="card-body">Commenda di San Calogero<br>Mussomeli, Caltanissetta</p>
+      <a class="card-link" href="https://maps.google.com/?q=Commenda+di+San+Calogero+Mussomeli" target="_blank">Apri mappa</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<section id="programma">
+  <p class="section-label">La giornata</p>
+  <h2 class="section-title">Programma</h2>
+  <div class="timeline">
+    <div class="tl-item">
+      <span class="tl-time">16:00</span>
+      <div class="tl-track"><div class="tl-dot"></div><div class="tl-wire"></div></div>
+      <div class="tl-content"><p class="tl-label">Cerimonia</p><p class="tl-desc">Duomo di Ortigia, Siracusa</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-time">18:30</span>
+      <div class="tl-track"><div class="tl-dot"></div><div class="tl-wire"></div></div>
+      <div class="tl-content"><p class="tl-label">Aperitivo & welcome drink</p><p class="tl-desc">Commenda di San Calogero, Mussomeli</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-time">20:30</span>
+      <div class="tl-track"><div class="tl-dot"></div><div class="tl-wire"></div></div>
+      <div class="tl-content"><p class="tl-label">Cena</p><p class="tl-desc">Gran galà di antipasti & servizio al tavolo</p></div>
+    </div>
+    <div class="tl-item">
+      <span class="tl-time">00:00</span>
+      <div class="tl-track"><div class="tl-dot"></div></div>
+      <div class="tl-content"><p class="tl-label">Taglio della torta & balli</p><p class="tl-desc">Fino a tarda notte</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<section id="rsvp">
+  <p class="section-label">Conferma la tua presenza</p>
+  <h2 class="section-title">RSVP</h2>
+  <p class="body-text" style="margin-bottom: 0.5rem;">Ti chiediamo di rispondere entro il <span style="color: var(--gold);">30 Aprile 2027</span></p>
+  <div class="rsvp-box">
+    <div id="rsvp-form">
+      <input type="text" id="rsvp-nome" placeholder="Nome e cognome" />
+      <select id="rsvp-presenza">
+        <option value="">Parteciperò?</option>
+        <option value="si">Sì, sarò presente con gioia</option>
+        <option value="no">No, purtroppo non potrò esserci</option>
+      </select>
+      <select id="rsvp-intolleranze">
+        <option value="">Intolleranze / preferenze alimentari</option>
+        <option value="nessuna">Nessuna</option>
+        <option value="vegetariano">Vegetariano/a</option>
+        <option value="vegano">Vegano/a</option>
+        <option value="celiaco">Celiaco/a</option>
+        <option value="pesce">Allergia al pesce</option>
+      </select>
+      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un messaggio? (opzionale)"></textarea>
+      <button class="rsvp-btn" onclick="inviaRSVP()">Conferma la presenza</button>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      Grazie mille! Non vediamo l'ora di festeggiare con te 🤍
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<section id="regalo">
+  <p class="section-label">Lista nozze</p>
+  <h2 class="section-title">Un pensiero per noi</h2>
+  <p class="body-text">
+    La vostra presenza è il regalo più bello. Se però volete contribuire al nostro viaggio di nozze,
+    potete fare un bonifico a uno di noi — qui trovate i QR code per farlo in un click dal vostro smartphone.
+  </p>
+  <div class="regalo-grid">
+    <div class="regalo-card">
+      <p class="regalo-name">Francesco</p>
+      <p class="regalo-iban">IT04T0347501605CC0013137058</p>
+      <div class="qr-wrap" id="qr-francesco"></div>
+      <p class="regalo-note">Scansiona per bonifico</p>
+    </div>
+    <div class="regalo-card">
+      <p class="regalo-name">Marilena</p>
+      <p class="regalo-iban">IT49Q0306983660100000006221</p>
+      <div class="qr-wrap" id="qr-marilena"></div>
+      <p class="regalo-note">Scansiona per bonifico</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-names">Francesco & Marilena</p>
+  <p class="footer-sub">17 Giugno 2027 · Con amore</p>
+</footer>
+
+<script>
+  // COUNTDOWN
+  function aggiornaCountdown() {
+    const target = new Date('2027-06-17T16:00:00');
+    const diff = target - new Date();
+    if (diff <= 0) {
+      ['cd-days','cd-hours','cd-mins','cd-secs'].forEach(id => document.getElementById(id).textContent = '0');
+      return;
+    }
+    document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
+    document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);
+    document.getElementById('cd-mins').textContent  = Math.floor((diff % 3600000) / 60000);
+    document.getElementById('cd-secs').textContent  = Math.floor((diff % 60000) / 1000);
+  }
+  aggiornaCountdown();
+  setInterval(aggiornaCountdown, 1000);
+
+  // QR CODES — formato EPC/SEPA
+  function makeEPC(nome, iban) {
+    return ['BCD','002','1','SCT','', nome, iban, '','','','Regalo matrimonio',''].join('\n');
+  }
+
+  window.addEventListener('load', function() {
+    new QRCode(document.getElementById('qr-francesco'), {
+      text: makeEPC('Francesco Di Pasquale', 'IT04T0347501605CC0013137058'),
+      width: 130, height: 130, colorDark: '#2c2220', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+    new QRCode(document.getElementById('qr-marilena'), {
+      text: makeEPC('Marilena Palmira Arena', 'IT49Q0306983660100000006221'),
+      width: 130, height: 130, colorDark: '#2c2220', colorLight: '#ffffff',
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  });
+
+  // RSVP
+  function inviaRSVP() {
+    const nome     = document.getElementById('rsvp-nome').value.trim();
+    const presenza = document.getElementById('rsvp-presenza').value;
+    if (!nome || !presenza) { alert('Per favore compila nome e conferma di presenza.'); return; }
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-success').style.display = 'block';
+  }
+
+  // NAV ACTIVE
+  const sezioni  = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sezioni.forEach(s => { if (window.scrollY >= s.offsetTop - 80) current = s.id; });
+    navLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + current));
+  });
+</script>
+</body>
+</html>
