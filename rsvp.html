@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RSVP — Francesco & Marilena</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="storia.html">Storia</a>
+  <a href="location.html">Location</a>
+  <a href="programma.html">Programma</a>
+  <a href="rsvp.html" class="active">RSVP</a>
+  <a href="regalo.html">Regalo</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=80');"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-label">Ci farebbe tanto piacere</p>
+    <h1 class="page-hero-title">Conferma la presenza</h1>
+    <p class="page-hero-sub">Entro il 30 Aprile 2027</p>
+  </div>
+</div>
+
+<section>
+  <p class="section-label">RSVP</p>
+  <h2 class="section-title">Sarà con noi?</h2>
+  <p class="body-text">
+    Ti chiediamo di confermare la tua presenza entro il
+    <span style="color: var(--gold);">30 Aprile 2027</span>
+    così potremo organizzare al meglio ogni dettaglio della serata.
+  </p>
+
+  <div class="rsvp-box">
+    <div id="rsvp-form">
+      <input type="text" id="rsvp-nome" placeholder="Nome e cognome" />
+      <select id="rsvp-presenza">
+        <option value="">Parteciperò?</option>
+        <option value="si">Sì, sarò presente con gioia</option>
+        <option value="no">No, purtroppo non potrò esserci</option>
+      </select>
+      <select id="rsvp-ospiti">
+        <option value="">Numero di persone (incluso te)</option>
+        <option value="1">Solo io</option>
+        <option value="2">In due</option>
+        <option value="3">In tre</option>
+        <option value="4">In quattro o più</option>
+      </select>
+      <select id="rsvp-intolleranze">
+        <option value="">Intolleranze / preferenze alimentari</option>
+        <option value="nessuna">Nessuna</option>
+        <option value="vegetariano">Vegetariano/a</option>
+        <option value="vegano">Vegano/a</option>
+        <option value="celiaco">Celiaco/a</option>
+        <option value="pesce">Allergia al pesce</option>
+        <option value="altro">Altro (specificare nel messaggio)</option>
+      </select>
+      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un messaggio o comunicarci qualcosa? (opzionale)"></textarea>
+      <button class="rsvp-btn" onclick="inviaRSVP()">Conferma la presenza</button>
+    </div>
+    <div class="rsvp-success" id="rsvp-success">
+      Grazie mille!<br>Non vediamo l'ora di festeggiare con te 🤍
+    </div>
+  </div>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<footer>
+  <p class="footer-names">Francesco & Marilena</p>
+  <p class="footer-sub">17 Giugno 2027 · Con amore</p>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="storia.html">Storia</a>
+    <a href="location.html">Location</a>
+    <a href="programma.html">Programma</a>
+    <a href="regalo.html">Regalo</a>
+  </nav>
+</footer>
+
+<script>
+  function inviaRSVP() {
+    const nome     = document.getElementById('rsvp-nome').value.trim();
+    const presenza = document.getElementById('rsvp-presenza').value;
+    if (!nome || !presenza) {
+      alert('Per favore compila almeno il nome e la conferma di presenza.');
+      return;
+    }
+    document.getElementById('rsvp-form').style.display = 'none';
+    document.getElementById('rsvp-success').style.display = 'block';
+  }
+</script>
+</body>
+</html>

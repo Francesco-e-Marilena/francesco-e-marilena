@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>La nostra storia — Francesco & Marilena</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .story-block {
+      display: grid; grid-template-columns: 80px 1fr;
+      gap: 0 2rem; padding: 0 2.5rem; margin-bottom: 2.5rem;
+    }
+    .story-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 42px; font-weight: 300; font-style: italic;
+      color: var(--gold); opacity: 0.5; line-height: 1;
+      padding-top: 4px; text-align: right;
+    }
+    .story-content { border-left: 0.5px solid var(--gold-light); padding-left: 2rem; }
+    .story-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic; color: var(--brown-dark);
+      margin-bottom: 6px;
+    }
+    .story-text { font-size: 14px; color: var(--brown-mid); line-height: 1.9; }
+
+    @media (max-width: 500px) {
+      .story-block { grid-template-columns: 1fr; }
+      .story-year { text-align: left; margin-bottom: 0.5rem; }
+      .story-content { border-left: none; padding-left: 0; border-top: 0.5px solid var(--gold-light); padding-top: 1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html">Home</a>
+  <a href="storia.html" class="active">Storia</a>
+  <a href="location.html">Location</a>
+  <a href="programma.html">Programma</a>
+  <a href="rsvp.html">RSVP</a>
+  <a href="regalo.html">Regalo</a>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1529636562758-15a843a6c6b0?w=1400&q=80');"></div>
+  <div class="page-hero-content">
+    <p class="page-hero-label">Chi siamo</p>
+    <h1 class="page-hero-title">La nostra storia</h1>
+    <p class="page-hero-sub">Francesco & Marilena</p>
+  </div>
+</div>
+
+<section>
+  <p class="section-label">Come tutto è iniziato</p>
+  <h2 class="section-title">Una storia d'amore</h2>
+  <p class="body-text">
+    Ci siamo incontrati per caso, ma l'amore non è mai davvero un caso.
+    Quello che sembrava un incontro ordinario si è trasformato in qualcosa di straordinario,
+    giorno dopo giorno, avventura dopo avventura.
+  </p>
+</section>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<div class="story-block">
+  <div class="story-year">I</div>
+  <div class="story-content">
+    <p class="story-title">Il primo incontro</p>
+    <p class="story-text">
+      Non avremmo mai pensato che quel giorno avrebbe cambiato tutto.
+      Eppure, basta uno sguardo, una parola, un sorriso — e il mondo
+      diventa improvvisamente un posto diverso. Più luminoso.
+    </p>
+  </div>
+</div>
+
+<div class="story-block">
+  <div class="story-year">II</div>
+  <div class="story-content">
+    <p class="story-title">Le avventure insieme</p>
+    <p class="story-text">
+      Anni di risate, viaggi, sogni condivisi e piccole grandi scoperte.
+      Abbiamo imparato a conoscerci, a sostenerci, a crescere insieme —
+      costruendo ogni giorno qualcosa che ci appartiene solo.
+    </p>
+  </div>
+</div>
+
+<div class="story-block">
+  <div class="story-year">III</div>
+  <div class="story-content">
+    <p class="story-title">La proposta</p>
+    <p class="story-text">
+      E poi è arrivato quel momento. Parole semplici, un cuore che batte forte,
+      e una risposta che ha sigillato tutto quello che eravamo già diventati.
+      Il resto è storia — e sarà la più bella di tutte.
+    </p>
+  </div>
+</div>
+
+<div class="story-block">
+  <div class="story-year">IV</div>
+  <div class="story-content">
+    <p class="story-title">17 Giugno 2027</p>
+    <p class="story-text">
+      Il giorno in cui diventare per sempre. Vi aspettiamo in Sicilia,
+      nella terra che ci ha visti crescere, per condividere con voi
+      il capitolo più bello della nostra storia.
+    </p>
+  </div>
+</div>
+
+<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+<footer>
+  <p class="footer-names">Francesco & Marilena</p>
+  <p class="footer-sub">17 Giugno 2027 · Con amore</p>
+  <nav class="footer-nav">
+    <a href="index.html">Home</a>
+    <a href="location.html">Location</a>
+    <a href="programma.html">Programma</a>
+    <a href="rsvp.html">RSVP</a>
+    <a href="regalo.html">Regalo</a>
+  </nav>
+</footer>
+</body>
+</html>
