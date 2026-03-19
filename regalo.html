@@ -5,7 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista nozze — Francesco & Marilena</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <style>
+    .qr-card {
+      background: var(--white);
+      border: 0.5px solid var(--gold-light);
+      border-radius: 14px;
+      padding: 2rem 1.2rem 1.6rem;
+      text-align: center;
+    }
+    .qr-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic;
+      color: var(--brown-dark); margin-bottom: 1.2rem;
+    }
+    .qr-img-wrap {
+      display: flex; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .qr-img-wrap img {
+      width: 150px; height: 150px;
+      border: 0.5px solid var(--gold-light);
+      border-radius: 8px;
+      padding: 6px;
+      background: #fff;
+    }
+    .qr-note {
+      font-size: 11px; letter-spacing: 1px;
+      color: var(--brown-light); font-style: italic;
+    }
+    .qr-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 2rem;
+    }
+    @media (max-width: 480px) {
+      .qr-grid { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
 
@@ -32,23 +69,25 @@
   <h2 class="section-title">Il vostro regalo</h2>
   <p class="body-text">
     La vostra presenza è già il regalo più bello che potete farci.
-    Se però volete contribuire al nostro viaggio di nozze e ai nostri sogni futuri,
-    potete fare un bonifico direttamente a uno di noi.<br><br>
-    Qui sotto trovate i QR code — basta inquadrare con lo smartphone per avviare il bonifico in un click.
+    Se però volete contribuire al nostro viaggio di nozze,
+    basta inquadrare il QR code con l'app della vostra banca —
+    il bonifico si avvia in automatico, senza dover inserire nulla a mano.
   </p>
 
-  <div class="regalo-grid" style="margin-top: 2rem;">
-    <div class="regalo-card">
-      <p class="regalo-name">Francesco</p>
-      <p class="regalo-iban">IT04T0347501605<br>CC0013137058</p>
-      <div class="qr-wrap" id="qr-francesco"></div>
-      <p class="regalo-note">Scansiona per bonifico</p>
+  <div class="qr-grid">
+    <div class="qr-card">
+      <p class="qr-card-name">Francesco</p>
+      <div class="qr-img-wrap">
+        <img src="qr_francesco.png" alt="QR bonifico Francesco" />
+      </div>
+      <p class="qr-note">Scansiona per bonifico istantaneo</p>
     </div>
-    <div class="regalo-card">
-      <p class="regalo-name">Marilena</p>
-      <p class="regalo-iban">IT49Q0306983660<br>100000006221</p>
-      <div class="qr-wrap" id="qr-marilena"></div>
-      <p class="regalo-note">Scansiona per bonifico</p>
+    <div class="qr-card">
+      <p class="qr-card-name">Marilena</p>
+      <div class="qr-img-wrap">
+        <img src="qr_marilena.png" alt="QR bonifico Marilena" />
+      </div>
+      <p class="qr-note">Scansiona per bonifico istantaneo</p>
     </div>
   </div>
 </section>
@@ -74,23 +113,5 @@
     <a href="rsvp.html">RSVP</a>
   </nav>
 </footer>
-
-<script>
-  function makeEPC(nome, iban) {
-    return ['BCD','002','1','SCT','', nome, iban, '','','','Regalo matrimonio',''].join('\n');
-  }
-  window.addEventListener('load', function() {
-    new QRCode(document.getElementById('qr-francesco'), {
-      text: makeEPC('Francesco Di Pasquale', 'IT04T0347501605CC0013137058'),
-      width: 130, height: 130, colorDark: '#2c2220', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-    new QRCode(document.getElementById('qr-marilena'), {
-      text: makeEPC('Marilena Palmira Arena', 'IT49Q0306983660100000006221'),
-      width: 130, height: 130, colorDark: '#2c2220', colorLight: '#ffffff',
-      correctLevel: QRCode.CorrectLevel.M
-    });
-  });
-</script>
 </body>
 </html>
