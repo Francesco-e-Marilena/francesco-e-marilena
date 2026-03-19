@@ -6,41 +6,65 @@
   <title>Lista nozze — Francesco & Marilena</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .qr-card {
-      background: var(--white);
-      border: 0.5px solid var(--gold-light);
-      border-radius: 14px;
-      padding: 2rem 1.2rem 1.6rem;
-      text-align: center;
-    }
-    .qr-card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-style: italic;
-      color: var(--brown-dark); margin-bottom: 1.2rem;
-    }
-    .qr-img-wrap {
-      display: flex; justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .qr-img-wrap img {
-      width: 150px; height: 150px;
-      border: 0.5px solid var(--gold-light);
-      border-radius: 8px;
-      padding: 6px;
-      background: #fff;
-    }
-    .qr-note {
-      font-size: 11px; letter-spacing: 1px;
-      color: var(--brown-light); font-style: italic;
-    }
-    .qr-grid {
+    .iban-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 2rem;
     }
+    .iban-card {
+      background: var(--white);
+      border: 0.5px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 2rem 1.4rem 1.6rem;
+      text-align: center;
+    }
+    .iban-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-style: italic;
+      color: var(--brown-dark);
+      margin-bottom: 0.4rem;
+    }
+    .iban-label {
+      font-size: 9px; letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.8rem;
+    }
+    .iban-code {
+      font-family: 'Jost', sans-serif;
+      font-size: 12px; font-weight: 400;
+      color: var(--brown-mid);
+      background: var(--cream);
+      border: 0.5px solid var(--gold-light);
+      border-radius: 8px;
+      padding: 10px 12px;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+      word-break: break-all;
+    }
+    .copy-btn {
+      background: transparent;
+      border: 0.5px solid var(--gold);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-family: 'Jost', sans-serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--gold);
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      width: 100%;
+    }
+    .copy-btn:hover { background: var(--gold); color: #fff; }
+    .copy-btn.copied {
+      background: var(--gold);
+      color: #fff;
+      letter-spacing: 1px;
+    }
     @media (max-width: 480px) {
-      .qr-grid { grid-template-columns: 1fr; }
+      .iban-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -70,24 +94,22 @@
   <p class="body-text">
     La vostra presenza è già il regalo più bello che potete farci.
     Se però volete contribuire al nostro viaggio di nozze,
-    basta inquadrare il QR code con l'app della vostra banca —
-    il bonifico si avvia in automatico, senza dover inserire nulla a mano.
+    qui sotto trovate i nostri IBAN — basta copiarlo e incollarlo
+    nella vostra app bancaria per effettuare il bonifico.
   </p>
 
-  <div class="qr-grid">
-    <div class="qr-card">
-      <p class="qr-card-name">Francesco</p>
-      <div class="qr-img-wrap">
-        <img src="qr_francesco.png" alt="QR bonifico Francesco" />
-      </div>
-      <p class="qr-note">Scansiona per bonifico istantaneo</p>
+  <div class="iban-grid">
+    <div class="iban-card">
+      <p class="iban-name">Francesco</p>
+      <p class="iban-label">IBAN</p>
+      <div class="iban-code" id="iban-f">IT04T0347501605CC0013137058</div>
+      <button class="copy-btn" onclick="copyIban('iban-f', this)">Copia IBAN</button>
     </div>
-    <div class="qr-card">
-      <p class="qr-card-name">Marilena</p>
-      <div class="qr-img-wrap">
-        <img src="qr_marilena.png" alt="QR bonifico Marilena" />
-      </div>
-      <p class="qr-note">Scansiona per bonifico istantaneo</p>
+    <div class="iban-card">
+      <p class="iban-name">Marilena</p>
+      <p class="iban-label">IBAN</p>
+      <div class="iban-code" id="iban-m">IT49Q0306983660100000006221</div>
+      <button class="copy-btn" onclick="copyIban('iban-m', this)">Copia IBAN</button>
     </div>
   </div>
 </section>
@@ -113,5 +135,19 @@
     <a href="rsvp.html">RSVP</a>
   </nav>
 </footer>
+
+<script>
+  function copyIban(id, btn) {
+    const text = document.getElementById(id).textContent.trim();
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Copiato!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = 'Copia IBAN';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+</script>
 </body>
 </html>
