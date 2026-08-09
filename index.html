@@ -4,52 +4,391 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Francesco & Marilena — 17 Giugno 2027</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
   <style>
-    .hero {
-      position: relative; text-align: center;
-      padding: 0; height: 100vh; min-height: 560px; max-height: 780px;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #fdf8f5;
+      --gold: #c4956a;
+      --gold-light: #e8d5c8;
+      --brown-dark: #2c2220;
+      --brown-mid: #6b5548;
+      --brown-light: #8a7060;
+    }
+    html, body { height: 100%; font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); }
+    body { max-width: 720px; margin: 0 auto; }
+
+    /* ══════════════════════════════
+       ENVELOPE SCREEN
+    ══════════════════════════════ */
+    #envelope-screen {
+      position: fixed; inset: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: center;
       overflow: hidden;
+      transition: opacity 1s ease;
+    }
+    #envelope-screen.hide { opacity: 0; pointer-events: none; }
+
+    /* Marble/dark linen background */
+    .env-bg {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 30% 20%, #2a1f14 0%, transparent 60%),
+        radial-gradient(ellipse at 70% 80%, #1a0f08 0%, transparent 60%),
+        #120c06;
+    }
+
+    /* Subtle gold dust particles */
+    .env-bg::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 20% 30%, rgba(196,149,106,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 60% 15%, rgba(196,149,106,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 80% 60%, rgba(196,149,106,0.25) 0%, transparent 100%),
+        radial-gradient(1px 1px at 40% 80%, rgba(196,149,106,0.3) 0%, transparent 100%),
+        radial-gradient(1px 1px at 10% 70%, rgba(196,149,106,0.2) 0%, transparent 100%);
+      animation: twinkle 4s ease-in-out infinite alternate;
+    }
+    @keyframes twinkle {
+      from { opacity: 0.4; }
+      to   { opacity: 1; }
+    }
+
+    .env-scene {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; align-items: center; gap: 0;
+    }
+
+    /* ── ENVELOPE WRAPPER ── */
+    .env-wrap {
+      position: relative;
+      width: min(420px, 88vw);
+    }
+
+    /* ── THE CARD (rises out) ── */
+    .env-card {
+      position: absolute;
+      bottom: 22%;
+      left: 50%;
+      transform: translateX(-50%) translateY(0px);
+      width: 76%;
+      z-index: 4;
+      opacity: 0;
+      transition:
+        transform 1.2s cubic-bezier(.15,.85,.2,1) 0.6s,
+        opacity   0.4s ease 0.6s;
+
+      /* Luxury card styling */
+      background: linear-gradient(145deg, #fefaf7 0%, #f8f0e8 100%);
+      border: 0.5px solid rgba(196,149,106,0.4);
+      border-radius: 2px;
+      padding: 2rem 1.6rem 1.8rem;
+      text-align: center;
+      box-shadow:
+        0 2px 0 rgba(196,149,106,0.2),
+        0 8px 40px rgba(0,0,0,0.25),
+        inset 0 0 30px rgba(196,149,106,0.04);
+    }
+    .env-wrap.opening .env-card {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-105%);
+    }
+
+    /* Card inner border */
+    .env-card::before {
+      content: '';
+      position: absolute; inset: 8px;
+      border: 0.5px solid rgba(196,149,106,0.25);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+
+    .card-eyebrow {
+      font-size: 8px; letter-spacing: 5px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; opacity: 0.8;
+    }
+    .card-ornament {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+    }
+    .card-ornament-line { flex: 1; height: 0.5px; background: var(--gold-light); }
+    .card-ornament-diamond {
+      width: 5px; height: 5px; background: var(--gold);
+      transform: rotate(45deg); opacity: 0.7; flex-shrink: 0;
+    }
+    .card-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 6vw, 30px);
+      font-weight: 300; font-style: italic;
+      color: var(--brown-dark); line-height: 1.15;
+      margin-bottom: 0.8rem;
+    }
+    .card-amp { color: var(--gold); }
+    .card-date {
+      font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
+      color: var(--brown-light); margin-top: 0.4rem;
+    }
+
+    /* ── ENVELOPE BOX ── */
+    .env-box {
+      position: relative;
+      width: 100%;
+      padding-top: 60%;
+      border-radius: 3px;
+      overflow: visible;
+      filter: drop-shadow(0 30px 70px rgba(0,0,0,0.7));
+    }
+
+    /* Base (front face of envelope) */
+    .env-base {
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, #f2e6d8 0%, #e8d8c4 50%, #ddc9b0 100%);
+      border-radius: 3px;
+      z-index: 1;
+    }
+
+    /* Linen texture overlay */
+    .env-base::after {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
+        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
+      border-radius: 3px;
+    }
+
+    /* Gold border frame */
+    .env-border {
+      position: absolute; inset: 8px;
+      border: 0.5px solid rgba(196,149,106,0.5);
+      border-radius: 2px;
+      z-index: 3;
+      pointer-events: none;
+    }
+    .env-border::before {
+      content: '';
+      position: absolute; inset: 4px;
+      border: 0.5px solid rgba(196,149,106,0.2);
+      border-radius: 1px;
+    }
+
+    /* Side folds (V shapes) */
+    .env-fold-left {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(165deg, #e5d4be 0%, #d8c5a8 100%);
+      clip-path: polygon(0 0, 0 100%, 50% 50%);
+    }
+    .env-fold-right {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(195deg, #ead9c2 0%, #ddc9ae 100%);
+      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+    }
+    .env-fold-bottom {
+      position: absolute; inset: 0; z-index: 2;
+      background: linear-gradient(0deg, #d4bfa3 0%, #e2d0b8 100%);
+      clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+    }
+
+    /* Top flap — opens upward with 3D rotation */
+    .env-flap-wrap {
+      position: absolute; inset: 0; z-index: 12;
+      clip-path: polygon(0 0, 100% 0, 50% 52%);
+      transform-origin: top center;
+      transform: rotateX(0deg);
+      transition: transform 1s cubic-bezier(.4,0,.15,1);
+      transform-style: preserve-3d;
+    }
+    .env-wrap.opening .env-flap-wrap {
+      transform: rotateX(-190deg);
+    }
+    .env-flap-front {
+      position: absolute; inset: 0;
+      background: linear-gradient(170deg, #eddec8 0%, #e2ceB5 60%, #d8c2a0 100%);
+    }
+    .env-flap-back {
+      position: absolute; inset: 0;
+      background: linear-gradient(170deg, #c8b898 0%, #b8a888 100%);
+      transform: rotateX(180deg);
+      backface-visibility: visible;
+    }
+
+    /* Flap inner triangle line */
+    .env-flap-front::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(196,149,106,0.4), transparent);
+    }
+
+    /* ── WAX SEAL ── */
+    .env-seal-wrap {
+      position: absolute;
+      top: 46%; left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 20;
+      cursor: pointer;
+    }
+
+    .env-seal {
+      width: 80px; height: 80px;
+      border-radius: 50%;
+      position: relative;
+      transition: transform 0.35s cubic-bezier(.2,.8,.3,1);
+    }
+    .env-seal-wrap:hover .env-seal {
+      transform: scale(1.12);
+    }
+
+    /* Outer glow ring */
+    .env-seal::before {
+      content: '';
+      position: absolute; inset: -6px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,149,106,0.2) 0%, transparent 70%);
+      animation: sealGlow 2.5s ease-in-out infinite;
+    }
+    @keyframes sealGlow {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.08); }
+    }
+
+    .env-seal-body {
+      width: 100%; height: 100%;
+      border-radius: 50%;
+      background: conic-gradient(
+        from 0deg,
+        #a0632a 0deg, #c9854a 60deg, #e8aa6a 90deg,
+        #d4924e 120deg, #b87838 180deg, #9a5e28 220deg,
+        #c48040 280deg, #e0a060 320deg, #a0632a 360deg
+      );
+      box-shadow:
+        0 6px 30px rgba(80,30,0,0.6),
+        0 2px 8px rgba(0,0,0,0.4),
+        inset 0 2px 6px rgba(255,200,120,0.3),
+        inset 0 -2px 6px rgba(60,20,0,0.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Shine on wax */
+    .env-seal-body::before {
+      content: '';
+      position: absolute;
+      top: 8%; left: 18%;
+      width: 40%; height: 30%;
+      background: radial-gradient(ellipse, rgba(255,230,170,0.45) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+
+    .env-seal-ring1 {
+      position: absolute; inset: 6px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,215,140,0.25);
+    }
+    .env-seal-ring2 {
+      position: absolute; inset: 11px;
+      border-radius: 50%;
+      border: 0.5px solid rgba(255,215,140,0.15);
+    }
+    .env-seal-monogram {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px; font-style: italic; font-weight: 600;
+      color: rgba(255,238,195,0.92);
+      text-shadow: 0 1px 4px rgba(40,10,0,0.6), 0 0 12px rgba(255,180,80,0.2);
+      letter-spacing: -1px;
+    }
+
+    /* ── HINT TEXT ── */
+    .env-hint {
+      margin-top: 32px;
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(196,149,106,0.5);
+      animation: glimmer 2.5s ease-in-out infinite;
+      text-align: center;
+    }
+    @keyframes glimmer {
+      0%, 100% { opacity: 0.3; }
+      50%       { opacity: 0.9; }
+    }
+
+    /* ══════════════════════════════
+       MAIN SITE
+    ══════════════════════════════ */
+    #site { opacity: 0; transition: opacity 0.9s ease 0.2s; }
+    #site.show { opacity: 1; }
+
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(253,248,245,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--gold-light);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    nav a {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--brown-light); text-decoration: none;
+      padding: 16px 12px; border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    nav a:hover, nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    .hero {
+      position: relative; text-align: center;
+      height: 100vh; min-height: 560px; max-height: 780px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
     }
     .hero-bg {
       position: absolute; inset: 0;
       background-image: url('commenda.jpg');
       background-size: cover; background-position: center;
-      filter: brightness(0.48);
-      transition: transform 10s ease;
+      filter: brightness(0.48); transition: transform 10s ease;
     }
     .hero:hover .hero-bg { transform: scale(1.04); }
     .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
     .hero-label {
       font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
       color: rgba(255,255,255,0.7); margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
     }
     .hero-names {
       font-family: 'Cormorant Garamond', serif;
       font-size: clamp(48px, 12vw, 78px);
       font-weight: 300; font-style: italic; color: #fff; line-height: 1.05;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
     }
     .hero-amp { color: var(--gold); }
     .hero-date {
       font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
       color: rgba(255,255,255,0.65); margin-top: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
     }
     .hero-scroll {
       position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
       z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
-      color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase;
+      color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
       animation: bounce 2s infinite;
     }
-    .hero-scroll span { font-size: 18px; }
     @keyframes bounce {
       0%, 100% { transform: translateX(-50%) translateY(0); }
-      50% { transform: translateX(-50%) translateY(6px); }
+      50%       { transform: translateX(-50%) translateY(6px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
+    .divider {
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 2.5rem; margin: 2.5rem 0;
+    }
+    .div-line { flex: 1; height: 0.5px; background: var(--gold-light); }
+    .div-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
+
     .countdown {
-      display: flex; justify-content: center; gap: 2rem; margin-top: 2.5rem;
+      display: flex; justify-content: center; gap: 2rem; padding: 2.5rem 2rem 0;
     }
     .countdown-item { text-align: center; }
     .countdown-num {
@@ -61,11 +400,13 @@
       color: var(--brown-light); margin-top: 4px;
     }
 
-    .home-intro { padding: 3.5rem 2.5rem 1rem; text-align: center; }
-    .home-intro-quote {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-style: italic; color: var(--brown-mid);
-      line-height: 1.7; max-width: 480px; margin: 0 auto 2rem;
+    .section-label {
+      font-size: 10px; letter-spacing: 4px; color: var(--gold);
+      text-transform: uppercase; margin-bottom: 0.4rem; text-align: center;
+    }
+    .body-text {
+      font-size: 15px; color: var(--brown-mid); line-height: 1.9;
+      text-align: center; max-width: 520px; margin: 0 auto;
     }
 
     .quick-links {
@@ -73,109 +414,169 @@
       padding: 0 2.5rem 3rem;
     }
     .quick-link {
-      background: var(--white); border: 0.5px solid var(--gold-light);
+      background: #fff; border: 0.5px solid var(--gold-light);
       border-radius: 12px; padding: 1.4rem 1rem; text-align: center;
-      text-decoration: none; transition: border-color 0.2s, transform 0.2s;
-      display: block;
+      text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block;
     }
     .quick-link:hover { border-color: var(--gold); transform: translateY(-2px); }
-    .quick-link-icon { font-size: 20px; color: var(--gold); opacity: 0.8; margin-bottom: 8px; }
-    .quick-link-label {
-      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--brown-light);
+    .quick-link-icon { font-size: 18px; color: var(--gold); opacity: 0.8; margin-bottom: 8px; }
+    .quick-link-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); }
+
+    footer {
+      text-align: center; padding: 3rem 2rem 2rem;
+      border-top: 0.5px solid var(--gold-light); margin-top: 2rem;
     }
+    .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: var(--gold); opacity: 0.8; }
+    .footer-sub { font-size: 10px; letter-spacing: 3px; color: var(--brown-light); text-transform: uppercase; margin-top: 6px; }
+    .footer-nav { display: flex; justify-content: center; gap: 16px; margin-top: 1.5rem; flex-wrap: wrap; }
+    .footer-nav a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); text-decoration: none; transition: color 0.2s; }
+    .footer-nav a:hover { color: var(--gold); }
 
     @media (max-width: 500px) {
       .quick-links { grid-template-columns: 1fr 1fr; }
+      nav a { padding: 12px 8px; font-size: 9px; letter-spacing: 2px; }
       .countdown { gap: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
-<nav>
-  <a href="index.html" class="active">Home</a>
-  <a href="storia.html">Storia</a>
-  <a href="cerimonia.html">Cerimonia</a>
-  <a href="ricevimento.html">Ricevimento</a>
-  <a href="programma.html">Programma</a>
-  <a href="rsvp.html">RSVP</a>
-  <a href="regalo.html">Regalo</a>
-</nav>
+<!-- ═══════ ENVELOPE ═══════ -->
+<div id="envelope-screen">
+  <div class="env-bg"></div>
 
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-label fade-up fade-up-1">Si sposano</p>
-    <h1 class="hero-names fade-up fade-up-2">
-      Francesco <span class="hero-amp">&</span> Marilena
-    </h1>
-    <p class="hero-date fade-up fade-up-3">17 Giugno 2027 &nbsp;·&nbsp; Sicilia</p>
+  <div class="env-scene">
+    <div class="env-wrap" id="envWrap">
+
+      <!-- CARD that rises -->
+      <div class="env-card">
+        <p class="card-eyebrow">Save the date</p>
+        <div class="card-ornament">
+          <div class="card-ornament-line"></div>
+          <div class="card-ornament-diamond"></div>
+          <div class="card-ornament-line"></div>
+        </div>
+        <h2 class="card-names">Francesco <span class="card-amp">&</span> Marilena</h2>
+        <div class="card-ornament" style="margin-top:0.8rem; margin-bottom:0.6rem;">
+          <div class="card-ornament-line"></div>
+          <div class="card-ornament-diamond"></div>
+          <div class="card-ornament-line"></div>
+        </div>
+        <p class="card-date">17 · VI · 2027 &nbsp;·&nbsp; Sicilia</p>
+      </div>
+
+      <!-- ENVELOPE BOX -->
+      <div class="env-box" style="perspective: 900px;">
+        <div class="env-base"></div>
+        <div class="env-fold-left"></div>
+        <div class="env-fold-right"></div>
+        <div class="env-fold-bottom"></div>
+        <div class="env-border"></div>
+
+        <!-- TOP FLAP -->
+        <div class="env-flap-wrap" style="perspective: 900px;">
+          <div class="env-flap-front"></div>
+          <div class="env-flap-back"></div>
+        </div>
+
+        <!-- WAX SEAL -->
+        <div class="env-seal-wrap" id="envSeal">
+          <div class="env-seal">
+            <div class="env-seal-body">
+              <div class="env-seal-ring1"></div>
+              <div class="env-seal-ring2"></div>
+              <div class="env-seal-monogram">F&M</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <p class="env-hint">tocca il sigillo per aprire</p>
   </div>
-  <div class="hero-scroll"><span>↓</span>scorri</div>
 </div>
 
-<div class="home-intro">
-  <p class="section-label">Il conto alla rovescia</p>
+<!-- ═══════ SITE ═══════ -->
+<div id="site">
+  <nav>
+    <a href="index.html" class="active">Home</a>
+    <a href="storia.html">Storia</a>
+    <a href="cerimonia.html">Cerimonia</a>
+    <a href="ricevimento.html">Ricevimento</a>
+    <a href="programma.html">Programma</a>
+    <a href="rsvp.html">RSVP</a>
+    <a href="regalo.html">Regalo</a>
+  </nav>
+
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <p class="hero-label">Si sposano</p>
+      <h1 class="hero-names">Francesco <span class="hero-amp">&</span> Marilena</h1>
+      <p class="hero-date">17 Giugno 2027 &nbsp;·&nbsp; Sicilia</p>
+    </div>
+    <div class="hero-scroll"><span>↓</span>scorri</div>
+  </div>
+
   <div class="countdown">
     <div class="countdown-item"><span class="countdown-num" id="cd-days">—</span><span class="countdown-label">Giorni</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-hours">—</span><span class="countdown-label">Ore</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-mins">—</span><span class="countdown-label">Minuti</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-secs">—</span><span class="countdown-label">Secondi</span></div>
   </div>
+
+  <div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
+
+  <div style="padding: 0 2.5rem 2rem; text-align: center;">
+    <p class="section-label">Vi aspettiamo</p>
+    <p class="body-text">"Vi aspettiamo per condividere con voi il giorno più bello della nostra vita, tra i profumi e i colori della nostra amata Sicilia."</p>
+  </div>
+
+  <div class="quick-links">
+    <a class="quick-link" href="storia.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">La nostra storia</div></a>
+    <a class="quick-link" href="cerimonia.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Cerimonia</div></a>
+    <a class="quick-link" href="ricevimento.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Ricevimento</div></a>
+    <a class="quick-link" href="programma.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Programma</div></a>
+    <a class="quick-link" href="rsvp.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">RSVP</div></a>
+    <a class="quick-link" href="regalo.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Lista nozze</div></a>
+  </div>
+
+  <footer>
+    <p class="footer-names">Francesco & Marilena</p>
+    <p class="footer-sub">17 Giugno 2027 · Con amore</p>
+    <nav class="footer-nav">
+      <a href="storia.html">Storia</a>
+      <a href="cerimonia.html">Cerimonia</a>
+      <a href="ricevimento.html">Ricevimento</a>
+      <a href="programma.html">Programma</a>
+      <a href="rsvp.html">RSVP</a>
+      <a href="regalo.html">Regalo</a>
+    </nav>
+  </footer>
 </div>
-
-<div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
-
-<div class="home-intro">
-  <p class="home-intro-quote">
-    "Vi aspettiamo per condividere con voi il giorno più bello della nostra vita,
-    tra i profumi e i colori della nostra amata Sicilia."
-  </p>
-</div>
-
-<div class="quick-links">
-  <a class="quick-link" href="storia.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">La nostra storia</div>
-  </a>
-  <a class="quick-link" href="cerimonia.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">Cerimonia</div>
-  </a>
-  <a class="quick-link" href="ricevimento.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">Ricevimento</div>
-  </a>
-  <a class="quick-link" href="programma.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">Programma</div>
-  </a>
-  <a class="quick-link" href="rsvp.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">RSVP</div>
-  </a>
-  <a class="quick-link" href="regalo.html">
-    <div class="quick-link-icon">✦</div>
-    <div class="quick-link-label">Lista nozze</div>
-  </a>
-</div>
-
-<footer>
-  <p class="footer-names">Francesco & Marilena</p>
-  <p class="footer-sub">17 Giugno 2027 · Con amore</p>
-  <nav class="footer-nav">
-    <a href="storia.html">Storia</a>
-    <a href="cerimonia.html">Cerimonia</a>
-  <a href="ricevimento.html">Ricevimento</a>
-    <a href="programma.html">Programma</a>
-    <a href="rsvp.html">RSVP</a>
-    <a href="regalo.html">Regalo</a>
-  </nav>
-</footer>
 
 <script>
-  function aggiornaCountdown() {
+  const seal   = document.getElementById('envSeal');
+  const wrap   = document.getElementById('envWrap');
+  const screen = document.getElementById('envelope-screen');
+  const site   = document.getElementById('site');
+
+  seal.addEventListener('click', () => {
+    wrap.classList.add('opening');
+    setTimeout(() => {
+      screen.classList.add('hide');
+      site.classList.add('show');
+    }, 1800);
+  });
+
+  screen.addEventListener('transitionend', e => {
+    if (e.propertyName === 'opacity' && screen.classList.contains('hide')) {
+      screen.style.display = 'none';
+    }
+  });
+
+  function tick() {
     const diff = new Date('2027-06-17T16:00:00') - new Date();
     if (diff <= 0) return;
     document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
@@ -183,8 +584,7 @@
     document.getElementById('cd-mins').textContent  = Math.floor((diff % 3600000) / 60000);
     document.getElementById('cd-secs').textContent  = Math.floor((diff % 60000) / 1000);
   }
-  aggiornaCountdown();
-  setInterval(aggiornaCountdown, 1000);
+  tick(); setInterval(tick, 1000);
 </script>
 </body>
 </html>
