@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Francesco & Marilena — 17 Giugno 2027</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
@@ -15,8 +15,19 @@
       --brown-dark: #2c2220;
       --brown-mid: #6b5548;
       --brown-light: #8a7060;
+      --rose: #c9a4a8;
+      --rose-dark: #a07880;
+      --rose-deep: #7a5460;
+      --rose-light: #e8d0d4;
+      --rose-mid: #d4b0b8;
     }
-    html, body { height: 100%; font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); }
+    html, body {
+      height: 100%;
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      -webkit-tap-highlight-color: transparent;
+    }
     body { max-width: 720px; margin: 0 auto; }
 
     /* ══════════════════════════════
@@ -25,293 +36,321 @@
     #envelope-screen {
       position: fixed; inset: 0; z-index: 1000;
       display: flex; align-items: center; justify-content: center;
-      overflow: hidden;
+      background: #1e0f14;
       transition: opacity 1s ease;
+      touch-action: manipulation;
     }
     #envelope-screen.hide { opacity: 0; pointer-events: none; }
 
-    /* Marble/dark linen background */
+    /* Dark rose background */
     .env-bg {
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse at 30% 20%, #2a1f14 0%, transparent 60%),
-        radial-gradient(ellipse at 70% 80%, #1a0f08 0%, transparent 60%),
-        #120c06;
+        radial-gradient(ellipse at 25% 25%, #2e1520 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 75%, #1a0c10 0%, transparent 55%),
+        radial-gradient(ellipse at 50% 50%, #251018 0%, transparent 70%),
+        #18090e;
     }
-
-    /* Subtle gold dust particles */
     .env-bg::after {
       content: '';
       position: absolute; inset: 0;
       background-image:
-        radial-gradient(1px 1px at 20% 30%, rgba(196,149,106,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 60% 15%, rgba(196,149,106,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 80% 60%, rgba(196,149,106,0.25) 0%, transparent 100%),
-        radial-gradient(1px 1px at 40% 80%, rgba(196,149,106,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 10% 70%, rgba(196,149,106,0.2) 0%, transparent 100%);
-      animation: twinkle 4s ease-in-out infinite alternate;
+        radial-gradient(1.5px 1.5px at 15% 20%, rgba(196,149,106,0.5) 0%, transparent 100%),
+        radial-gradient(1px 1px at 55% 10%, rgba(196,149,106,0.35) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 85% 35%, rgba(196,149,106,0.4) 0%, transparent 100%),
+        radial-gradient(1px 1px at 30% 75%, rgba(196,149,106,0.3) 0%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 70% 85%, rgba(196,149,106,0.45) 0%, transparent 100%),
+        radial-gradient(1px 1px at 45% 55%, rgba(201,164,168,0.3) 0%, transparent 100%);
+      animation: twinkle 3.5s ease-in-out infinite alternate;
     }
-    @keyframes twinkle {
-      from { opacity: 0.4; }
-      to   { opacity: 1; }
-    }
+    @keyframes twinkle { from { opacity: 0.4; } to { opacity: 1; } }
 
     .env-scene {
       position: relative; z-index: 1;
       display: flex; flex-direction: column; align-items: center; gap: 0;
+      width: 100%;
     }
 
-    /* ── ENVELOPE WRAPPER ── */
     .env-wrap {
       position: relative;
-      width: min(420px, 88vw);
+      width: min(380px, 86vw);
+      user-select: none;
+      -webkit-user-select: none;
     }
 
-    /* ── THE CARD (rises out) ── */
+    /* ── RISING CARD ── */
     .env-card {
       position: absolute;
-      bottom: 22%;
+      bottom: 20%;
       left: 50%;
       transform: translateX(-50%) translateY(0px);
-      width: 76%;
+      width: 78%;
       z-index: 4;
       opacity: 0;
-      transition:
-        transform 1.2s cubic-bezier(.15,.85,.2,1) 0.6s,
-        opacity   0.4s ease 0.6s;
-
-      /* Luxury card styling */
-      background: linear-gradient(145deg, #fefaf7 0%, #f8f0e8 100%);
-      border: 0.5px solid rgba(196,149,106,0.4);
+      transition: transform 1.3s cubic-bezier(.12,.88,.18,1) 0.55s,
+                  opacity  0.45s ease 0.55s;
+      background: linear-gradient(145deg, #fefaf7 0%, #f9f0e8 100%);
+      border: 0.5px solid rgba(196,149,106,0.45);
       border-radius: 2px;
-      padding: 2rem 1.6rem 1.8rem;
+      padding: 1.8rem 1.4rem 1.6rem;
       text-align: center;
-      box-shadow:
-        0 2px 0 rgba(196,149,106,0.2),
-        0 8px 40px rgba(0,0,0,0.25),
-        inset 0 0 30px rgba(196,149,106,0.04);
+      box-shadow: 0 4px 40px rgba(0,0,0,0.3), inset 0 0 20px rgba(196,149,106,0.04);
     }
     .env-wrap.opening .env-card {
       opacity: 1;
-      transform: translateX(-50%) translateY(-105%);
+      transform: translateX(-50%) translateY(-108%);
     }
-
-    /* Card inner border */
     .env-card::before {
       content: '';
-      position: absolute; inset: 8px;
-      border: 0.5px solid rgba(196,149,106,0.25);
-      border-radius: 1px;
+      position: absolute; inset: 7px;
+      border: 0.5px solid rgba(196,149,106,0.22);
       pointer-events: none;
     }
-
     .card-eyebrow {
       font-size: 8px; letter-spacing: 5px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1rem; opacity: 0.8;
+      color: var(--gold); margin-bottom: 0.9rem; opacity: 0.85;
     }
-    .card-ornament {
-      display: flex; align-items: center; gap: 10px; margin-bottom: 1rem;
+    .card-orn {
+      display: flex; align-items: center; gap: 8px; margin-bottom: 0.9rem;
     }
-    .card-ornament-line { flex: 1; height: 0.5px; background: var(--gold-light); }
-    .card-ornament-diamond {
+    .card-orn-line { flex: 1; height: 0.5px; background: var(--gold-light); }
+    .card-orn-d {
       width: 5px; height: 5px; background: var(--gold);
-      transform: rotate(45deg); opacity: 0.7; flex-shrink: 0;
+      transform: rotate(45deg); opacity: 0.65; flex-shrink: 0;
     }
     .card-names {
       font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(22px, 6vw, 30px);
+      font-size: clamp(20px, 5.5vw, 28px);
       font-weight: 300; font-style: italic;
-      color: var(--brown-dark); line-height: 1.15;
-      margin-bottom: 0.8rem;
+      color: var(--brown-dark); line-height: 1.15; margin-bottom: 0.8rem;
     }
     .card-amp { color: var(--gold); }
     .card-date {
       font-size: 9px; letter-spacing: 4px; text-transform: uppercase;
-      color: var(--brown-light); margin-top: 0.4rem;
+      color: var(--brown-light);
     }
 
     /* ── ENVELOPE BOX ── */
     .env-box {
       position: relative;
       width: 100%;
-      padding-top: 60%;
-      border-radius: 3px;
-      overflow: visible;
-      filter: drop-shadow(0 30px 70px rgba(0,0,0,0.7));
+      padding-top: 62%;
+      border-radius: 4px;
+      filter: drop-shadow(0 28px 60px rgba(0,0,0,0.75));
     }
 
-    /* Base (front face of envelope) */
+    /* Base */
     .env-base {
+      position: absolute; inset: 0; border-radius: 4px; overflow: hidden;
+      background: linear-gradient(145deg, #c4a0ac 0%, #b08898 40%, #9a7080 100%);
+    }
+
+    /* Rose pattern SVG overlay — embossed effect */
+    .env-roses {
       position: absolute; inset: 0;
-      background: linear-gradient(160deg, #f2e6d8 0%, #e8d8c4 50%, #ddc9b0 100%);
-      border-radius: 3px;
+      border-radius: 4px; overflow: hidden;
+      opacity: 0.22;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='22' fill='none' stroke='%23fff' stroke-width='1.2'/%3E%3Ccircle cx='60' cy='60' r='14' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='7' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='38' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='82' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='38' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='82' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='44' cy='44' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(-45 44 44)'/%3E%3Cellipse cx='76' cy='44' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(45 76 44)'/%3E%3Cellipse cx='44' cy='76' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(45 44 76)'/%3E%3Cellipse cx='76' cy='76' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(-45 76 76)'/%3E%3C/svg%3E");
+      background-size: 80px 80px;
+    }
+
+    /* Highlight sheen */
+    .env-sheen {
+      position: absolute; inset: 0; border-radius: 4px;
+      background: linear-gradient(135deg,
+        rgba(255,255,255,0.18) 0%,
+        rgba(255,255,255,0.06) 30%,
+        rgba(0,0,0,0.08) 70%,
+        rgba(0,0,0,0.18) 100%);
       z-index: 1;
     }
 
-    /* Linen texture overlay */
-    .env-base::after {
-      content: '';
-      position: absolute; inset: 0;
-      background-image:
-        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px),
-        repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.02) 2px, rgba(255,255,255,0.02) 4px);
-      border-radius: 3px;
-    }
-
-    /* Gold border frame */
+    /* Gold border */
     .env-border {
-      position: absolute; inset: 8px;
-      border: 0.5px solid rgba(196,149,106,0.5);
-      border-radius: 2px;
-      z-index: 3;
-      pointer-events: none;
+      position: absolute; inset: 7px; border-radius: 2px;
+      border: 0.5px solid rgba(196,149,106,0.55);
+      z-index: 3; pointer-events: none;
     }
     .env-border::before {
-      content: '';
-      position: absolute; inset: 4px;
-      border: 0.5px solid rgba(196,149,106,0.2);
-      border-radius: 1px;
+      content: ''; position: absolute; inset: 4px; border-radius: 1px;
+      border: 0.5px solid rgba(196,149,106,0.25);
     }
 
-    /* Side folds (V shapes) */
+    /* Side & bottom folds */
     .env-fold-left {
       position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(165deg, #e5d4be 0%, #d8c5a8 100%);
-      clip-path: polygon(0 0, 0 100%, 50% 50%);
+      background: linear-gradient(165deg, #a87888 0%, #956070 100%);
+      clip-path: polygon(0 0, 0 100%, 50% 52%);
+    }
+    .env-fold-left::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='22' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='13' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='38' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='60' cy='82' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='38' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='82' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3C/svg%3E");
+      background-size: 80px 80px; opacity: 0.18;
     }
     .env-fold-right {
       position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(195deg, #ead9c2 0%, #ddc9ae 100%);
-      clip-path: polygon(100% 0, 100% 100%, 50% 50%);
+      background: linear-gradient(195deg, #b08890 0%, #907080 100%);
+      clip-path: polygon(100% 0, 100% 100%, 50% 52%);
+    }
+    .env-fold-right::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='22' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='13' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='38' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='60' cy='82' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='38' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='82' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3C/svg%3E");
+      background-size: 80px 80px; opacity: 0.18;
     }
     .env-fold-bottom {
       position: absolute; inset: 0; z-index: 2;
-      background: linear-gradient(0deg, #d4bfa3 0%, #e2d0b8 100%);
-      clip-path: polygon(0 100%, 100% 100%, 50% 50%);
+      background: linear-gradient(0deg, #8a6070 0%, #a87888 100%);
+      clip-path: polygon(0 100%, 100% 100%, 50% 52%);
+    }
+    .env-fold-bottom::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='22' fill='none' stroke='%23fff' stroke-width='1'/%3E%3Ccircle cx='60' cy='60' r='13' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='38' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='60' cy='82' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='38' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3Cellipse cx='82' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.7'/%3E%3C/svg%3E");
+      background-size: 80px 80px; opacity: 0.18;
     }
 
-    /* Top flap — opens upward with 3D rotation */
+    /* TOP FLAP */
     .env-flap-wrap {
       position: absolute; inset: 0; z-index: 12;
-      clip-path: polygon(0 0, 100% 0, 50% 52%);
+      clip-path: polygon(0 0, 100% 0, 50% 54%);
       transform-origin: top center;
       transform: rotateX(0deg);
       transition: transform 1s cubic-bezier(.4,0,.15,1);
       transform-style: preserve-3d;
+      perspective: 800px;
     }
-    .env-wrap.opening .env-flap-wrap {
-      transform: rotateX(-190deg);
-    }
+    .env-wrap.opening .env-flap-wrap { transform: rotateX(-188deg); }
+
     .env-flap-front {
       position: absolute; inset: 0;
-      background: linear-gradient(170deg, #eddec8 0%, #e2ceB5 60%, #d8c2a0 100%);
+      background: linear-gradient(170deg, #caaab4 0%, #b890a0 50%, #a07888 100%);
+      backface-visibility: hidden;
+    }
+    .env-flap-front::after {
+      content: ''; position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Ccircle cx='60' cy='60' r='22' fill='none' stroke='%23fff' stroke-width='1.1'/%3E%3Ccircle cx='60' cy='60' r='14' fill='none' stroke='%23fff' stroke-width='0.9'/%3E%3Cellipse cx='60' cy='38' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='60' cy='82' rx='8' ry='12' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='38' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='82' cy='60' rx='12' ry='8' fill='none' stroke='%23fff' stroke-width='0.8'/%3E%3Cellipse cx='44' cy='44' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(-45 44 44)'/%3E%3Cellipse cx='76' cy='44' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(45 76 44)'/%3E%3Cellipse cx='44' cy='76' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(45 44 76)'/%3E%3Cellipse cx='76' cy='76' rx='7' ry='10' fill='none' stroke='%23fff' stroke-width='0.7' transform='rotate(-45 76 76)'/%3E%3C/svg%3E");
+      background-size: 80px 80px; opacity: 0.2;
     }
     .env-flap-back {
       position: absolute; inset: 0;
-      background: linear-gradient(170deg, #c8b898 0%, #b8a888 100%);
+      background: linear-gradient(170deg, #8a6878 0%, #7a5868 100%);
       transform: rotateX(180deg);
-      backface-visibility: visible;
-    }
-
-    /* Flap inner triangle line */
-    .env-flap-front::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(196,149,106,0.4), transparent);
+      backface-visibility: hidden;
     }
 
     /* ── WAX SEAL ── */
     .env-seal-wrap {
       position: absolute;
-      top: 46%; left: 50%;
+      top: 47%; left: 50%;
       transform: translate(-50%, -50%);
       z-index: 20;
       cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .env-seal {
-      width: 80px; height: 80px;
+      width: 86px; height: 86px;
       border-radius: 50%;
       position: relative;
-      transition: transform 0.35s cubic-bezier(.2,.8,.3,1);
+      transition: transform 0.3s cubic-bezier(.2,.8,.3,1);
     }
-    .env-seal-wrap:hover .env-seal {
-      transform: scale(1.12);
-    }
+    .env-seal-wrap:hover .env-seal,
+    .env-seal-wrap:active .env-seal { transform: scale(1.1); }
 
-    /* Outer glow ring */
+    /* Outer pulse ring */
     .env-seal::before {
-      content: '';
-      position: absolute; inset: -6px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(196,149,106,0.2) 0%, transparent 70%);
-      animation: sealGlow 2.5s ease-in-out infinite;
+      content: ''; position: absolute; inset: -8px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,149,106,0.25) 0%, transparent 70%);
+      animation: sealPulse 2.8s ease-in-out infinite;
     }
-    @keyframes sealGlow {
-      0%, 100% { opacity: 0.4; transform: scale(1); }
-      50%       { opacity: 1;   transform: scale(1.08); }
+    @keyframes sealPulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.12); }
     }
 
     .env-seal-body {
-      width: 100%; height: 100%;
-      border-radius: 50%;
+      width: 100%; height: 100%; border-radius: 50%;
       background: conic-gradient(
         from 0deg,
-        #a0632a 0deg, #c9854a 60deg, #e8aa6a 90deg,
-        #d4924e 120deg, #b87838 180deg, #9a5e28 220deg,
-        #c48040 280deg, #e0a060 320deg, #a0632a 360deg
+        #8a5c2a 0deg, #b8802a 40deg, #d4a050 70deg,
+        #e8b860 90deg, #d09840 110deg, #b07828 150deg,
+        #986020 200deg, #b88030 240deg, #d4a050 280deg,
+        #c49040 310deg, #a06820 340deg, #8a5c2a 360deg
       );
       box-shadow:
-        0 6px 30px rgba(80,30,0,0.6),
-        0 2px 8px rgba(0,0,0,0.4),
-        inset 0 2px 6px rgba(255,200,120,0.3),
-        inset 0 -2px 6px rgba(60,20,0,0.4);
-      position: relative;
-      overflow: hidden;
+        0 0 0 2px rgba(196,149,106,0.6),
+        0 0 0 4px rgba(120,80,30,0.3),
+        0 8px 32px rgba(60,20,0,0.7),
+        0 2px 8px rgba(0,0,0,0.5),
+        inset 0 2px 8px rgba(255,210,120,0.35),
+        inset 0 -3px 8px rgba(40,10,0,0.5);
+      position: relative; overflow: hidden;
     }
 
-    /* Shine on wax */
+    /* Shine */
     .env-seal-body::before {
-      content: '';
-      position: absolute;
-      top: 8%; left: 18%;
-      width: 40%; height: 30%;
-      background: radial-gradient(ellipse, rgba(255,230,170,0.45) 0%, transparent 70%);
-      border-radius: 50%;
-      transform: rotate(-20deg);
+      content: ''; position: absolute;
+      top: 7%; left: 15%; width: 42%; height: 32%;
+      background: radial-gradient(ellipse, rgba(255,235,160,0.5) 0%, transparent 70%);
+      border-radius: 50%; transform: rotate(-25deg);
     }
 
-    .env-seal-ring1 {
-      position: absolute; inset: 6px;
-      border-radius: 50%;
-      border: 1px solid rgba(255,215,140,0.25);
+    /* Ornate frame inside seal */
+    .env-seal-frame {
+      position: absolute; inset: 7px; border-radius: 50%;
+      border: 1.5px solid rgba(255,215,130,0.5);
+      box-shadow: inset 0 0 6px rgba(255,200,80,0.2);
     }
-    .env-seal-ring2 {
-      position: absolute; inset: 11px;
-      border-radius: 50%;
-      border: 0.5px solid rgba(255,215,140,0.15);
+    .env-seal-frame::before {
+      content: ''; position: absolute; inset: 4px; border-radius: 50%;
+      border: 0.8px solid rgba(255,215,130,0.28);
     }
+    /* Small decorative dots on frame */
+    .env-seal-frame::after {
+      content: ''; position: absolute; inset: -2px; border-radius: 50%;
+      border: 1px dashed rgba(255,215,130,0.2);
+    }
+
     .env-seal-monogram {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
       font-family: 'Cormorant Garamond', serif;
-      font-size: 23px; font-style: italic; font-weight: 600;
-      color: rgba(255,238,195,0.92);
-      text-shadow: 0 1px 4px rgba(40,10,0,0.6), 0 0 12px rgba(255,180,80,0.2);
+      font-size: 22px; font-style: italic; font-weight: 600;
+      color: rgba(255,240,190,0.96);
+      text-shadow:
+        0 1px 4px rgba(40,10,0,0.7),
+        0 0 16px rgba(255,180,60,0.25);
       letter-spacing: -1px;
     }
 
-    /* ── HINT TEXT ── */
+    /* Warm glow under seal */
+    .env-seal-glow {
+      position: absolute;
+      top: 47%; left: 50%;
+      transform: translate(-50%, 20%);
+      width: 120px; height: 40px;
+      background: radial-gradient(ellipse, rgba(180,100,20,0.55) 0%, transparent 70%);
+      border-radius: 50%;
+      z-index: 19;
+      pointer-events: none;
+      animation: glowPulse 2.8s ease-in-out infinite;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.5; }
+      50%       { opacity: 1; }
+    }
+
+    /* ── HINT ── */
     .env-hint {
-      margin-top: 32px;
+      margin-top: 36px;
       font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
       color: rgba(196,149,106,0.5);
       animation: glimmer 2.5s ease-in-out infinite;
       text-align: center;
     }
     @keyframes glimmer {
-      0%, 100% { opacity: 0.3; }
-      50%       { opacity: 0.9; }
+      0%, 100% { opacity: 0.25; }
+      50%       { opacity: 0.85; }
     }
 
     /* ══════════════════════════════
@@ -322,8 +361,7 @@
 
     nav {
       position: sticky; top: 0; z-index: 100;
-      background: rgba(253,248,245,0.96);
-      backdrop-filter: blur(8px);
+      background: rgba(253,248,245,0.96); backdrop-filter: blur(8px);
       border-bottom: 0.5px solid var(--gold-light);
       display: flex; justify-content: center; flex-wrap: wrap;
     }
@@ -379,59 +417,26 @@
       from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-
-    .divider {
-      display: flex; align-items: center; gap: 12px;
-      padding: 0 2.5rem; margin: 2.5rem 0;
-    }
+    .divider { display: flex; align-items: center; gap: 12px; padding: 0 2.5rem; margin: 2.5rem 0; }
     .div-line { flex: 1; height: 0.5px; background: var(--gold-light); }
     .div-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
-
-    .countdown {
-      display: flex; justify-content: center; gap: 2rem; padding: 2.5rem 2rem 0;
-    }
+    .countdown { display: flex; justify-content: center; gap: 2rem; padding: 2.5rem 2rem 0; }
     .countdown-item { text-align: center; }
-    .countdown-num {
-      font-family: 'Cormorant Garamond', serif; font-size: 38px;
-      font-weight: 300; color: var(--gold); line-height: 1; display: block;
-    }
-    .countdown-label {
-      font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--brown-light); margin-top: 4px;
-    }
-
-    .section-label {
-      font-size: 10px; letter-spacing: 4px; color: var(--gold);
-      text-transform: uppercase; margin-bottom: 0.4rem; text-align: center;
-    }
-    .body-text {
-      font-size: 15px; color: var(--brown-mid); line-height: 1.9;
-      text-align: center; max-width: 520px; margin: 0 auto;
-    }
-
-    .quick-links {
-      display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px;
-      padding: 0 2.5rem 3rem;
-    }
-    .quick-link {
-      background: #fff; border: 0.5px solid var(--gold-light);
-      border-radius: 12px; padding: 1.4rem 1rem; text-align: center;
-      text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block;
-    }
+    .countdown-num { font-family: 'Cormorant Garamond', serif; font-size: 38px; font-weight: 300; color: var(--gold); line-height: 1; display: block; }
+    .countdown-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); margin-top: 4px; }
+    .section-label { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem; text-align: center; }
+    .body-text { font-size: 15px; color: var(--brown-mid); line-height: 1.9; text-align: center; max-width: 520px; margin: 0 auto; }
+    .quick-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 2.5rem 3rem; }
+    .quick-link { background: #fff; border: 0.5px solid var(--gold-light); border-radius: 12px; padding: 1.4rem 1rem; text-align: center; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block; }
     .quick-link:hover { border-color: var(--gold); transform: translateY(-2px); }
     .quick-link-icon { font-size: 18px; color: var(--gold); opacity: 0.8; margin-bottom: 8px; }
     .quick-link-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); }
-
-    footer {
-      text-align: center; padding: 3rem 2rem 2rem;
-      border-top: 0.5px solid var(--gold-light); margin-top: 2rem;
-    }
+    footer { text-align: center; padding: 3rem 2rem 2rem; border-top: 0.5px solid var(--gold-light); margin-top: 2rem; }
     .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: var(--gold); opacity: 0.8; }
     .footer-sub { font-size: 10px; letter-spacing: 3px; color: var(--brown-light); text-transform: uppercase; margin-top: 6px; }
     .footer-nav { display: flex; justify-content: center; gap: 16px; margin-top: 1.5rem; flex-wrap: wrap; }
     .footer-nav a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); text-decoration: none; transition: color 0.2s; }
     .footer-nav a:hover { color: var(--gold); }
-
     @media (max-width: 500px) {
       .quick-links { grid-template-columns: 1fr 1fr; }
       nav a { padding: 12px 8px; font-size: 9px; letter-spacing: 2px; }
@@ -444,55 +449,48 @@
 <!-- ═══════ ENVELOPE ═══════ -->
 <div id="envelope-screen">
   <div class="env-bg"></div>
-
   <div class="env-scene">
     <div class="env-wrap" id="envWrap">
 
-      <!-- CARD that rises -->
+      <!-- Rising card -->
       <div class="env-card">
         <p class="card-eyebrow">Save the date</p>
-        <div class="card-ornament">
-          <div class="card-ornament-line"></div>
-          <div class="card-ornament-diamond"></div>
-          <div class="card-ornament-line"></div>
-        </div>
+        <div class="card-orn"><div class="card-orn-line"></div><div class="card-orn-d"></div><div class="card-orn-line"></div></div>
         <h2 class="card-names">Francesco <span class="card-amp">&</span> Marilena</h2>
-        <div class="card-ornament" style="margin-top:0.8rem; margin-bottom:0.6rem;">
-          <div class="card-ornament-line"></div>
-          <div class="card-ornament-diamond"></div>
-          <div class="card-ornament-line"></div>
-        </div>
+        <div class="card-orn" style="margin-top:0.7rem;margin-bottom:0.6rem;"><div class="card-orn-line"></div><div class="card-orn-d"></div><div class="card-orn-line"></div></div>
         <p class="card-date">17 · VI · 2027 &nbsp;·&nbsp; Sicilia</p>
       </div>
 
-      <!-- ENVELOPE BOX -->
-      <div class="env-box" style="perspective: 900px;">
+      <!-- Envelope box -->
+      <div class="env-box">
         <div class="env-base"></div>
+        <div class="env-roses"></div>
+        <div class="env-sheen"></div>
         <div class="env-fold-left"></div>
         <div class="env-fold-right"></div>
         <div class="env-fold-bottom"></div>
         <div class="env-border"></div>
 
-        <!-- TOP FLAP -->
-        <div class="env-flap-wrap" style="perspective: 900px;">
+        <!-- Flap -->
+        <div class="env-flap-wrap">
           <div class="env-flap-front"></div>
           <div class="env-flap-back"></div>
         </div>
 
-        <!-- WAX SEAL -->
+        <!-- Glow under seal -->
+        <div class="env-seal-glow"></div>
+
+        <!-- Wax seal -->
         <div class="env-seal-wrap" id="envSeal">
           <div class="env-seal">
             <div class="env-seal-body">
-              <div class="env-seal-ring1"></div>
-              <div class="env-seal-ring2"></div>
+              <div class="env-seal-frame"></div>
               <div class="env-seal-monogram">F&M</div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
-
     <p class="env-hint">tocca il sigillo per aprire</p>
   </div>
 </div>
@@ -508,7 +506,6 @@
     <a href="rsvp.html">RSVP</a>
     <a href="regalo.html">Regalo</a>
   </nav>
-
   <div class="hero">
     <div class="hero-bg"></div>
     <div class="hero-content">
@@ -518,21 +515,17 @@
     </div>
     <div class="hero-scroll"><span>↓</span>scorri</div>
   </div>
-
   <div class="countdown">
     <div class="countdown-item"><span class="countdown-num" id="cd-days">—</span><span class="countdown-label">Giorni</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-hours">—</span><span class="countdown-label">Ore</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-mins">—</span><span class="countdown-label">Minuti</span></div>
     <div class="countdown-item"><span class="countdown-num" id="cd-secs">—</span><span class="countdown-label">Secondi</span></div>
   </div>
-
   <div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
-
   <div style="padding: 0 2.5rem 2rem; text-align: center;">
     <p class="section-label">Vi aspettiamo</p>
     <p class="body-text">"Vi aspettiamo per condividere con voi il giorno più bello della nostra vita, tra i profumi e i colori della nostra amata Sicilia."</p>
   </div>
-
   <div class="quick-links">
     <a class="quick-link" href="storia.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">La nostra storia</div></a>
     <a class="quick-link" href="cerimonia.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Cerimonia</div></a>
@@ -541,7 +534,6 @@
     <a class="quick-link" href="rsvp.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">RSVP</div></a>
     <a class="quick-link" href="regalo.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Lista nozze</div></a>
   </div>
-
   <footer>
     <p class="footer-names">Francesco & Marilena</p>
     <p class="footer-sub">17 Giugno 2027 · Con amore</p>
@@ -561,14 +553,24 @@
   const wrap   = document.getElementById('envWrap');
   const screen = document.getElementById('envelope-screen');
   const site   = document.getElementById('site');
+  let opened = false;
 
-  seal.addEventListener('click', () => {
+  function openEnvelope() {
+    if (opened) return;
+    opened = true;
     wrap.classList.add('opening');
     setTimeout(() => {
       screen.classList.add('hide');
       site.classList.add('show');
-    }, 1800);
-  });
+    }, 1900);
+  }
+
+  // Fix per iPhone: usa sia click che touchend
+  seal.addEventListener('click', openEnvelope);
+  seal.addEventListener('touchend', function(e) {
+    e.preventDefault();
+    openEnvelope();
+  }, { passive: false });
 
   screen.addEventListener('transitionend', e => {
     if (e.propertyName === 'opacity' && screen.classList.contains('hide')) {
