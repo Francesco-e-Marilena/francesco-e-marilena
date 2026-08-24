@@ -5,6 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RSVP — Francesco & Marilena</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .guest-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .guest-num {
+      font-size: 11px; letter-spacing: 2px; color: var(--gold);
+      min-width: 22px; text-align: right; flex-shrink: 0;
+    }
+    .guest-row input {
+      flex: 1;
+      border: 0.5px solid var(--gold-light); border-radius: 8px;
+      padding: 11px 14px; font-family: 'Jost', sans-serif; font-size: 14px;
+      font-weight: 300; color: var(--brown-dark); background: var(--cream);
+      outline: none; transition: border-color 0.2s;
+      margin-bottom: 0 !important;
+    }
+    .guest-row input:focus { border-color: var(--gold); }
+
+    .num-selector {
+      display: flex; align-items: center;
+      margin-bottom: 14px;
+      border: 0.5px solid var(--gold-light); border-radius: 8px;
+      overflow: hidden; background: var(--cream);
+    }
+    .num-selector button {
+      background: transparent; border: none;
+      padding: 12px 20px; font-size: 20px; color: var(--gold);
+      cursor: pointer; transition: background 0.2s; line-height: 1;
+    }
+    .num-selector button:hover { background: var(--gold-light); }
+    .num-selector span {
+      flex: 1; text-align: center;
+      font-size: 18px; color: var(--brown-dark);
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+    }
+    .sub-label {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; display: block;
+    }
+    .field-divider { height: 0.5px; background: var(--gold-light); margin: 16px 0; }
+  </style>
 </head>
 <body>
 
@@ -22,7 +63,7 @@
   <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=80');"></div>
   <div class="page-hero-content">
     <p class="page-hero-label">Ci farebbe tanto piacere</p>
-    <h1 class="page-hero-title">Conferma la presenza</h1>
+    <h1 class="page-hero-title">Sarà con noi?</h1>
     <p class="page-hero-sub">Entro il 30 Aprile 2027</p>
   </div>
 </div>
@@ -38,33 +79,45 @@
 
   <div class="rsvp-box">
     <div id="rsvp-form">
-      <input type="text" id="rsvp-nome" placeholder="Nome e cognome" />
+
       <select id="rsvp-presenza">
         <option value="">Parteciperò?</option>
         <option value="si">Sì, sarò presente con gioia</option>
         <option value="no">No, purtroppo non potrò esserci</option>
       </select>
-      <select id="rsvp-ospiti">
-        <option value="">Numero di persone (incluso te)</option>
-        <option value="1">Solo io</option>
-        <option value="2">In due</option>
-        <option value="3">In tre</option>
-        <option value="4">In quattro o più</option>
-      </select>
-      <select id="rsvp-intolleranze">
-        <option value="">Intolleranze / preferenze alimentari</option>
-        <option value="nessuna">Nessuna</option>
-        <option value="vegetariano">Vegetariano/a</option>
-        <option value="vegano">Vegano/a</option>
-        <option value="celiaco">Celiaco/a</option>
-        <option value="pesce">Allergia al pesce</option>
-        <option value="altro">Altro (specificare nel messaggio)</option>
-      </select>
-      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un messaggio o comunicarci qualcosa? (opzionale)"></textarea>
+
+      <div id="sezione-ospiti" style="display:none;">
+        <div class="field-divider"></div>
+
+        <span class="sub-label">Quante persone parteciperanno?</span>
+        <div class="num-selector">
+          <button type="button" onclick="cambiaNumero(-1)">−</button>
+          <span id="num-display">1</span>
+          <button type="button" onclick="cambiaNumero(+1)">+</button>
+        </div>
+
+        <span class="sub-label">Nome di ogni partecipante</span>
+        <div id="guest-fields"></div>
+
+        <div class="field-divider"></div>
+
+        <select id="rsvp-intolleranze">
+          <option value="">Intolleranze / preferenze alimentari</option>
+          <option value="nessuna">Nessuna</option>
+          <option value="vegetariano">Vegetariano/a</option>
+          <option value="vegano">Vegano/a</option>
+          <option value="celiaco">Celiaco/a</option>
+          <option value="pesce">Allergia al pesce</option>
+          <option value="altro">Altro (specificare nel messaggio)</option>
+        </select>
+      </div>
+
+      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un messaggio? (opzionale)"></textarea>
       <button class="rsvp-btn" onclick="inviaRSVP()">Conferma la presenza</button>
     </div>
+
     <div class="rsvp-success" id="rsvp-success">
-      Grazie mille!<br>Non vediamo l'ora di festeggiare con te 🤍
+      Grazie mille!<br>Non vediamo l'ora di festeggiare con voi 🤍
     </div>
   </div>
 </section>
@@ -78,23 +131,59 @@
     <a href="index.html">Home</a>
     <a href="storia.html">Storia</a>
     <a href="cerimonia.html">Cerimonia</a>
-  <a href="ricevimento.html">Ricevimento</a>
+    <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
     <a href="regalo.html">Regalo</a>
   </nav>
 </footer>
 
 <script>
+  let numPartecipanti = 1;
+
+  document.getElementById('rsvp-presenza').addEventListener('change', function() {
+    const sez = document.getElementById('sezione-ospiti');
+    if (this.value === 'si') {
+      sez.style.display = 'block';
+      aggiornaCampi();
+    } else {
+      sez.style.display = 'none';
+    }
+  });
+
+  function cambiaNumero(delta) {
+    numPartecipanti = Math.max(1, Math.min(20, numPartecipanti + delta));
+    document.getElementById('num-display').textContent = numPartecipanti;
+    aggiornaCampi();
+  }
+
+  function aggiornaCampi() {
+    const container = document.getElementById('guest-fields');
+    const esistenti = container.querySelectorAll('input');
+    const valori = Array.from(esistenti).map(i => i.value);
+    container.innerHTML = '';
+    for (let i = 0; i < numPartecipanti; i++) {
+      const row = document.createElement('div');
+      row.className = 'guest-row';
+      row.innerHTML = `
+        <span class="guest-num">${i + 1}.</span>
+        <input type="text" placeholder="Nome e cognome" value="${valori[i] || ''}" />
+      `;
+      container.appendChild(row);
+    }
+  }
+
   function inviaRSVP() {
-    const nome     = document.getElementById('rsvp-nome').value.trim();
     const presenza = document.getElementById('rsvp-presenza').value;
-    if (!nome || !presenza) {
-      alert('Per favore compila almeno il nome e la conferma di presenza.');
-      return;
+    if (!presenza) { alert('Per favore indica se parteciperai.'); return; }
+    if (presenza === 'si') {
+      const vuoti = Array.from(document.querySelectorAll('#guest-fields input')).some(i => !i.value.trim());
+      if (vuoti) { alert('Per favore inserisci il nome di tutti i partecipanti.'); return; }
     }
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('rsvp-success').style.display = 'block';
   }
+
+  aggiornaCampi();
 </script>
 </body>
 </html>
