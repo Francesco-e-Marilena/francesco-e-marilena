@@ -6,39 +6,34 @@
   <title>Lista nozze — Francesco & Marilena</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .iban-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 2rem;
-    }
     .iban-card {
       background: var(--white);
       border: 0.5px solid var(--gold-light);
       border-radius: 16px;
-      padding: 2rem 1.4rem 1.6rem;
+      padding: 2.5rem 2rem 2rem;
       text-align: center;
+      margin-top: 2rem;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .iban-name {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; font-style: italic;
-      color: var(--brown-dark);
-      margin-bottom: 0.4rem;
+      font-size: 24px; font-style: italic;
+      color: var(--brown-dark); margin-bottom: 0.3rem;
     }
     .iban-label {
-      font-size: 9px; letter-spacing: 3px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 0.8rem;
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 0.8rem;
     }
     .iban-code {
       font-family: 'Jost', sans-serif;
-      font-size: 12px; font-weight: 400;
+      font-size: 13px; font-weight: 400;
       color: var(--brown-mid);
       background: var(--cream);
       border: 0.5px solid var(--gold-light);
       border-radius: 8px;
-      padding: 10px 12px;
+      padding: 11px 14px;
       letter-spacing: 1.5px;
       margin-bottom: 1rem;
       word-break: break-all;
@@ -49,23 +44,13 @@
       border-radius: 8px;
       padding: 10px 20px;
       font-family: 'Jost', sans-serif;
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: var(--gold);
-      cursor: pointer;
+      font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--gold); cursor: pointer;
       transition: background 0.2s, color 0.2s;
       width: 100%;
     }
     .copy-btn:hover { background: var(--gold); color: #fff; }
-    .copy-btn.copied {
-      background: var(--gold);
-      color: #fff;
-      letter-spacing: 1px;
-    }
-    @media (max-width: 480px) {
-      .iban-grid { grid-template-columns: 1fr; }
-    }
+    .copy-btn.copied { background: var(--gold); color: #fff; }
   </style>
 </head>
 <body>
@@ -80,12 +65,13 @@
   <a href="regalo.html" class="active">Regalo</a>
 </nav>
 
+<!-- Hero con sakura giapponese -->
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=1400&q=80');"></div>
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1400&q=80');"></div>
   <div class="page-hero-content">
-    <p class="page-hero-label">Lista nozze</p>
+    <p class="page-hero-label">Lista nozze · Viaggio di nozze</p>
     <h1 class="page-hero-title">Un pensiero per noi</h1>
-    <p class="page-hero-sub">Francesco & Marilena</p>
+    <p class="page-hero-sub">Giappone 🌸</p>
   </div>
 </div>
 
@@ -94,24 +80,16 @@
   <h2 class="section-title">Il vostro regalo</h2>
   <p class="body-text">
     La vostra presenza è già il regalo più bello che potete farci.
-    Se però volete contribuire al nostro viaggio di nozze,
-    qui sotto trovate i nostri IBAN — basta copiarlo e incollarlo
+    Se però volete contribuire al nostro viaggio di nozze in Giappone,
+    qui sotto trovate il nostro IBAN — basta copiarlo e incollarlo
     nella vostra app bancaria per effettuare il bonifico.
   </p>
 
-  <div class="iban-grid">
-    <div class="iban-card">
-      <p class="iban-name">Francesco</p>
-      <p class="iban-label">IBAN</p>
-      <div class="iban-code" id="iban-f">IT04T0347501605CC0013137058</div>
-      <button class="copy-btn" onclick="copyIban('iban-f', this)">Copia IBAN</button>
-    </div>
-    <div class="iban-card">
-      <p class="iban-name">Marilena</p>
-      <p class="iban-label">IBAN</p>
-      <div class="iban-code" id="iban-m">IT49Q0306983660100000006221</div>
-      <button class="copy-btn" onclick="copyIban('iban-m', this)">Copia IBAN</button>
-    </div>
+  <div class="iban-card">
+    <p class="iban-name">Francesco Di Pasquale</p>
+    <p class="iban-label">IBAN</p>
+    <div class="iban-code" id="iban-f">IT04T0347501605CC0013137058</div>
+    <button class="copy-btn" onclick="copyIban('iban-f', this)">Copia IBAN</button>
   </div>
 </section>
 
@@ -119,7 +97,7 @@
 
 <section style="padding-top: 0; text-align: center;">
   <p class="body-text" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--brown-mid);">
-    "Con voi accanto, ogni sogno diventa possibile."
+    "Con voi accanto, ogni sogno diventa possibile — anche quello di perderci tra i fiori di ciliegio del Giappone."
   </p>
 </section>
 
@@ -132,7 +110,7 @@
     <a href="index.html">Home</a>
     <a href="storia.html">Storia</a>
     <a href="cerimonia.html">Cerimonia</a>
-  <a href="ricevimento.html">Ricevimento</a>
+    <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
     <a href="rsvp.html">RSVP</a>
   </nav>
@@ -142,7 +120,7 @@
   function copyIban(id, btn) {
     const text = document.getElementById(id).textContent.trim();
     navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = 'Copiato!';
+      btn.textContent = 'Copiato! ✓';
       btn.classList.add('copied');
       setTimeout(() => {
         btn.textContent = 'Copia IBAN';
