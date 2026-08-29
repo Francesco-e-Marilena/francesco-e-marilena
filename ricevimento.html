@@ -4,25 +4,61 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Ricevimento — Francesco & Marilena</title>
-  <meta name="description" content="Il ricevimento di Francesco e Marilena alla Commenda di San Calogero, Augusta, il 17 giugno 2027."/>
-  <meta property="og:title" content="Ricevimento — Francesco & Marilena"/>
-  <meta property="og:description" content="Francesco & Marilena · 17 giugno 2027 · Commenda di San Calogero, Augusta"/>
   <link rel="stylesheet" href="style.css">
+  <style>
+    .location-section { padding: 3rem 2.5rem 2rem; }
+    .location-img-hero {
+      width: 100%; height: 280px; object-fit: cover;
+      border-radius: 16px; display: block; margin: 1.2rem 0;
+    }
+    .location-img-row {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 1rem 0;
+    }
+    .location-img-row img {
+      width: 100%; height: 180px; object-fit: cover;
+      border-radius: 12px; display: block;
+    }
+    .location-info {
+      background: var(--white); border: 0.5px solid var(--gold-light);
+      border-radius: 14px; padding: 1.6rem; margin-top: 1.2rem;
+    }
+    .location-info-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-style: italic; color: var(--brown-dark); margin-bottom: 10px;
+    }
+    .location-info-row {
+      display: flex; gap: 10px; align-items: flex-start;
+      margin-bottom: 8px; font-size: 13px; color: var(--brown-mid);
+    }
+    .location-info-row span:first-child { color: var(--gold); min-width: 18px; }
+    .map-btn {
+      display: inline-block; margin-top: 14px;
+      background: var(--gold); color: var(--white);
+      text-decoration: none; border-radius: 8px;
+      padding: 10px 24px; font-size: 10px; letter-spacing: 2px;
+      text-transform: uppercase; transition: background 0.2s;
+    }
+    .map-btn:hover { background: #b0804f; }
+    @media (max-width: 500px) {
+      .location-section { padding: 2.5rem 1.5rem 1.5rem; }
+      .location-img-row { grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="storia.html">Storia</a>
   <a href="cerimonia.html">Cerimonia</a>
   <a href="ricevimento.html" class="active">Ricevimento</a>
   <a href="programma.html">Programma</a>
-  <a href="arrivare.html">Come arrivare</a>
   <a href="rsvp.html">RSVP</a>
-  <a href="regalo.html">Lista nozze</a>
+  <a href="regalo.html">Regalo</a>
 </nav>
 
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('commenda.jpg');" role="img" aria-label="Commenda di San Calogero, Augusta"></div>
+  <div class="page-hero-bg" style="background-image: url('commenda.jpg');"></div>
   <div class="page-hero-content">
     <p class="page-hero-label">Il ricevimento</p>
     <h1 class="page-hero-title">Commenda di San Calogero</h1>
@@ -30,32 +66,32 @@
   </div>
 </div>
 
-<section>
+<div class="location-section">
   <p class="section-label">Il ricevimento</p>
   <h2 class="section-title">Commenda di San Calogero</h2>
 
-  <img class="location-img-hero" src="commenda.jpg" alt="Commenda di San Calogero, Augusta" loading="lazy"/>
+  <img class="location-img-hero" src="commenda.jpg" alt="Commenda di San Calogero" />
 
   <p class="body-text" style="margin-top: 1.2rem;">
-    Un'esclusiva tenuta immersa tra agrumeti, ulivi e giardini curati,
+    Un'esclusiva tenuta di 110 ettari immersa tra agrumeti, ulivi e giardini curati,
     con una vista mozzafiato sul mare di Sicilia. Qui continueremo a festeggiare
     insieme fino a tarda notte, tra sapori, musica e tanto amore.
   </p>
 
   <div class="location-img-row">
-    <img src="Commenda2.jpg" alt="Commenda di San Calogero — dettaglio" loading="lazy"/>
-    <img src="Commenda3.jpg" alt="Commenda di San Calogero — giardini" loading="lazy"/>
+    <img src="Commenda2.jpg" alt="Commenda di San Calogero - dettaglio" />
+    <img src="Commenda3.jpg" alt="Commenda di San Calogero - giardini" />
   </div>
 
-  <div class="info-box">
-    <p class="info-box-title">Commenda di San Calogero</p>
-    <div class="info-row"><span>✦</span><span>Contrada S. Calogero, B/136 · 96011 Augusta (SR)</span></div>
-    <div class="info-row"><span>✦</span><span>Arrivo degli ospiti dalle ore <strong>18:30</strong></span></div>
-    <div class="info-row"><span>✦</span><span>Welcome drink e aperitivo dalle ore <strong>19:00</strong></span></div>
-    <div class="info-row"><span>✦</span><span>Parcheggio disponibile in loco</span></div>
-    <a class="map-btn" href="https://maps.google.com/?q=Contrada+S.+Calogero+B136+Augusta+SR" target="_blank" rel="noopener" aria-label="Apri la Commenda di San Calogero in Google Maps">Apri in Google Maps</a>
+  <div class="location-info">
+    <p class="location-info-title">Commenda di San Calogero</p>
+    <div class="location-info-row"><span>✦</span><span>Contrada S. Calogero, B/136 · 96011 Augusta (SR)</span></div>
+    <div class="location-info-row"><span>✦</span><span>Ricevimento ore 18:30</span></div>
+    <div class="location-info-row"><span>✦</span><span>Aeroporto più vicino: Catania (CTA) · 30 minuti</span></div>
+    <div class="location-info-row"><span>✦</span><span>Parcheggio disponibile in loco</span></div>
+    <a class="map-btn" href="https://maps.google.com/?q=Contrada+S.+Calogero+B136+Augusta+SR" target="_blank">Apri in Google Maps</a>
   </div>
-</section>
+</div>
 
 <div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
 
@@ -67,9 +103,8 @@
     <a href="storia.html">Storia</a>
     <a href="cerimonia.html">Cerimonia</a>
     <a href="programma.html">Programma</a>
-    <a href="arrivare.html">Come arrivare</a>
     <a href="rsvp.html">RSVP</a>
-    <a href="regalo.html">Lista nozze</a>
+    <a href="regalo.html">Regalo</a>
   </nav>
 </footer>
 </body>

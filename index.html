@@ -4,83 +4,138 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Francesco & Marilena — 17 Giugno 2027</title>
-  <meta name="description" content="Francesco Di Pasquale e Marilena Palmira Arena si sposano il 17 giugno 2027 in Sicilia. Scopri tutti i dettagli del matrimonio."/>
-  <meta property="og:title" content="Francesco & Marilena — 17 Giugno 2027"/>
-  <meta property="og:description" content="Si sposano il 17 giugno 2027 in Sicilia. Duomo di Ortigia · Commenda di San Calogero."/>
-  <meta property="og:type" content="website"/>
-  <meta property="og:url" content="https://francesco-e-marilena.github.io/francesco-e-marilena/"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --cream: #fdf8f5; --gold: #c4956a; --gold-light: #e8d5c8;
-      --brown-dark: #2c2220; --brown-mid: #6b5548; --brown-light: #8a7060;
+      --cream: #fdf8f5;
+      --gold: #c4956a;
+      --gold-light: #e8d5c8;
+      --brown-dark: #2c2220;
+      --brown-mid: #6b5548;
+      --brown-light: #8a7060;
     }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Jost', sans-serif; font-weight: 300; background: var(--cream); color: var(--brown-dark); max-width: 720px; margin: 0 auto; }
+    body {
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      background: var(--cream);
+      color: var(--brown-dark);
+      line-height: 1.7;
+      max-width: 720px;
+      margin: 0 auto;
+    }
 
-    nav { position: sticky; top: 0; z-index: 100; background: rgba(253,248,245,0.96); backdrop-filter: blur(8px); border-bottom: 0.5px solid var(--gold-light); display: flex; justify-content: center; flex-wrap: wrap; }
-    nav a { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brown-light); text-decoration: none; padding: 15px 11px; border-bottom: 2px solid transparent; transition: color 0.2s, border-color 0.2s; }
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(253,248,245,0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 0.5px solid var(--gold-light);
+      display: flex; justify-content: center; flex-wrap: wrap;
+    }
+    nav a {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--brown-light); text-decoration: none;
+      padding: 16px 12px; border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
     nav a:hover, nav a.active { color: var(--gold); border-bottom-color: var(--gold); }
 
-    .hero { position: relative; text-align: center; height: 100vh; min-height: 580px; max-height: 800px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-    .hero-bg { position: absolute; inset: 0; background-image: url('commenda.jpg'); background-size: cover; background-position: center; filter: brightness(0.46); transition: transform 10s ease; }
+    .hero {
+      position: relative; text-align: center;
+      height: 100vh; min-height: 560px; max-height: 780px;
+      display: flex; align-items: center; justify-content: center; overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('commenda.jpg');
+      background-size: cover; background-position: center;
+      filter: brightness(0.48); transition: transform 10s ease;
+    }
     .hero:hover .hero-bg { transform: scale(1.04); }
     .hero-content { position: relative; z-index: 1; padding: 0 2rem; }
-    .hero-label { font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 1.6rem; opacity: 0; animation: fadeUp 0.9s ease forwards 0.1s; }
-    .hero-names { font-family: 'Cormorant Garamond', serif; font-size: clamp(50px, 13vw, 82px); font-weight: 300; font-style: italic; color: #fff; line-height: 1.02; opacity: 0; animation: fadeUp 0.9s ease forwards 0.28s; }
+    .hero-label {
+      font-size: 10px; letter-spacing: 5px; text-transform: uppercase;
+      color: rgba(255,255,255,0.7); margin-bottom: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
+    }
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 12vw, 78px);
+      font-weight: 300; font-style: italic; color: #fff; line-height: 1.05;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.25s;
+    }
     .hero-amp { color: var(--gold); }
-    .hero-divider { width: 60px; height: 0.5px; background: rgba(196,149,106,0.6); margin: 1.4rem auto; opacity: 0; animation: fadeUp 0.9s ease forwards 0.42s; }
-    .hero-date { font-size: 11px; letter-spacing: 5px; text-transform: uppercase; color: rgba(255,255,255,0.6); opacity: 0; animation: fadeUp 0.9s ease forwards 0.56s; }
-    .hero-scroll { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.4); font-size: 9px; letter-spacing: 2px; text-transform: uppercase; animation: bounce 2.2s infinite; }
-    @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(7px)} }
-    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)} }
+    .hero-date {
+      font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(255,255,255,0.65); margin-top: 1.4rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+    .hero-scroll {
+      position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+      z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+      color: rgba(255,255,255,0.5); font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(6px); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
 
     .divider { display: flex; align-items: center; gap: 12px; padding: 0 2.5rem; margin: 2.5rem 0; }
     .div-line { flex: 1; height: 0.5px; background: var(--gold-light); }
     .div-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); opacity: 0.7; }
 
-    .countdown { display: flex; justify-content: center; gap: 2.5rem; padding: 3rem 2rem 0; }
+    .countdown { display: flex; justify-content: center; gap: 2rem; padding: 2.5rem 2rem 0; }
     .countdown-item { text-align: center; }
-    .countdown-num { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--gold); line-height: 1; display: block; }
-    .countdown-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--brown-light); margin-top: 5px; }
+    .countdown-num {
+      font-family: 'Cormorant Garamond', serif; font-size: 38px;
+      font-weight: 300; color: var(--gold); line-height: 1; display: block;
+    }
+    .countdown-label { font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); margin-top: 4px; }
 
     .section-label { font-size: 10px; letter-spacing: 4px; color: var(--gold); text-transform: uppercase; margin-bottom: 0.4rem; text-align: center; }
     .body-text { font-size: 15px; color: var(--brown-mid); line-height: 1.9; text-align: center; max-width: 520px; margin: 0 auto; }
 
     .quick-links { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 0 2.5rem 3rem; }
-    .quick-link { background: #fff; border: 0.5px solid var(--gold-light); border-radius: 12px; padding: 1.5rem 1rem; text-align: center; text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block; }
+    .quick-link {
+      background: #fff; border: 0.5px solid var(--gold-light);
+      border-radius: 12px; padding: 1.4rem 1rem; text-align: center;
+      text-decoration: none; transition: border-color 0.2s, transform 0.2s; display: block;
+    }
     .quick-link:hover { border-color: var(--gold); transform: translateY(-2px); }
-    .quick-link-icon { font-size: 18px; color: var(--gold); opacity: 0.75; margin-bottom: 9px; }
+    .quick-link-icon { font-size: 18px; color: var(--gold); opacity: 0.8; margin-bottom: 8px; }
     .quick-link-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); }
 
     footer { text-align: center; padding: 3rem 2rem 2rem; border-top: 0.5px solid var(--gold-light); margin-top: 2rem; }
     .footer-names { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-style: italic; color: var(--gold); opacity: 0.8; }
     .footer-sub { font-size: 10px; letter-spacing: 3px; color: var(--brown-light); text-transform: uppercase; margin-top: 6px; }
-    .footer-nav { display: flex; justify-content: center; gap: 14px; margin-top: 1.5rem; flex-wrap: wrap; }
+    .footer-nav { display: flex; justify-content: center; gap: 16px; margin-top: 1.5rem; flex-wrap: wrap; }
     .footer-nav a { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--brown-light); text-decoration: none; transition: color 0.2s; }
     .footer-nav a:hover { color: var(--gold); }
 
-    @media (max-width: 540px) {
+    @media (max-width: 500px) {
       .quick-links { grid-template-columns: 1fr 1fr; }
-      nav a { padding: 12px 8px; font-size: 9px; letter-spacing: 1.5px; }
-      .countdown { gap: 1.4rem; }
-      .countdown-num { font-size: 34px; }
-      .divider { padding: 0 1.4rem; }
+      nav a { padding: 12px 8px; font-size: 9px; letter-spacing: 2px; }
+      .countdown { gap: 1.2rem; }
     }
   </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html" class="active">Home</a>
   <a href="storia.html">Storia</a>
   <a href="cerimonia.html">Cerimonia</a>
   <a href="ricevimento.html">Ricevimento</a>
   <a href="programma.html">Programma</a>
-  <a href="arrivare.html">Come arrivare</a>
   <a href="rsvp.html">RSVP</a>
-  <a href="regalo.html">Lista nozze</a>
+  <a href="regalo.html">Regalo</a>
 </nav>
 
 <div class="hero">
@@ -88,7 +143,6 @@
   <div class="hero-content">
     <p class="hero-label">Si sposano</p>
     <h1 class="hero-names">Francesco <span class="hero-amp">&</span> Marilena</h1>
-    <div class="hero-divider"></div>
     <p class="hero-date">17 Giugno 2027 &nbsp;·&nbsp; Sicilia</p>
   </div>
   <div class="hero-scroll"><span>↓</span>scorri</div>
@@ -105,7 +159,6 @@
 
 <div style="padding: 0 2.5rem 2rem; text-align: center;">
   <p class="section-label">Vi aspettiamo</p>
-  <!-- TESTO PERSONALIZZABILE: sostituisci questa frase con una vostra citazione personale -->
   <p class="body-text">"Vi aspettiamo per condividere con voi il giorno più bello della nostra vita, tra i profumi e i colori della nostra amata Sicilia."</p>
 </div>
 
@@ -114,8 +167,8 @@
   <a class="quick-link" href="cerimonia.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Cerimonia</div></a>
   <a class="quick-link" href="ricevimento.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Ricevimento</div></a>
   <a class="quick-link" href="programma.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Programma</div></a>
-  <a class="quick-link" href="arrivare.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Come arrivare</div></a>
   <a class="quick-link" href="rsvp.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">RSVP</div></a>
+  <a class="quick-link" href="regalo.html"><div class="quick-link-icon">✦</div><div class="quick-link-label">Lista nozze</div></a>
 </div>
 
 <footer>
@@ -126,15 +179,14 @@
     <a href="cerimonia.html">Cerimonia</a>
     <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
-    <a href="arrivare.html">Come arrivare</a>
     <a href="rsvp.html">RSVP</a>
-    <a href="regalo.html">Lista nozze</a>
+    <a href="regalo.html">Regalo</a>
   </nav>
 </footer>
 
 <script>
   function tick() {
-    const diff = new Date('2027-06-17T16:30:00') - new Date();
+    const diff = new Date('2027-06-17T16:00:00') - new Date();
     if (diff <= 0) return;
     document.getElementById('cd-days').textContent  = Math.floor(diff / 86400000);
     document.getElementById('cd-hours').textContent = Math.floor((diff % 86400000) / 3600000);

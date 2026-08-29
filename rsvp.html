@@ -4,58 +4,63 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>RSVP — Francesco & Marilena</title>
-  <meta name="description" content="Conferma la tua presenza al matrimonio di Francesco e Marilena, 17 giugno 2027. Scadenza: 30 aprile 2027."/>
-  <meta property="og:title" content="RSVP — Francesco & Marilena"/>
-  <meta property="og:description" content="Conferma la presenza entro il 30 aprile 2027. Francesco & Marilena · 17 giugno 2027"/>
   <link rel="stylesheet" href="style.css">
   <style>
-    .guest-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-    .guest-num { font-size: 11px; letter-spacing: 2px; color: var(--gold); min-width: 22px; text-align: right; flex-shrink: 0; }
-    .guest-row input { flex: 1; border: 0.5px solid var(--gold-light); border-radius: 8px; padding: 12px 14px; font-family: 'Jost', sans-serif; font-size: 14px; font-weight: 300; color: var(--brown-dark); background: var(--cream); outline: none; transition: border-color 0.2s; margin-bottom: 0 !important; }
+    .guest-row {
+      display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+    }
+    .guest-num {
+      font-size: 11px; letter-spacing: 2px; color: var(--gold);
+      min-width: 22px; text-align: right; flex-shrink: 0;
+    }
+    .guest-row input {
+      flex: 1;
+      border: 0.5px solid var(--gold-light); border-radius: 8px;
+      padding: 11px 14px; font-family: 'Jost', sans-serif; font-size: 14px;
+      font-weight: 300; color: var(--brown-dark); background: var(--cream);
+      outline: none; transition: border-color 0.2s;
+      margin-bottom: 0 !important;
+    }
     .guest-row input:focus { border-color: var(--gold); }
 
-    .num-selector { display: flex; align-items: center; margin-bottom: 14px; border: 0.5px solid var(--gold-light); border-radius: 8px; overflow: hidden; background: var(--cream); }
-    .num-selector button { background: transparent; border: none; padding: 12px 22px; font-size: 20px; color: var(--gold); cursor: pointer; transition: background 0.2s; line-height: 1; min-width: 48px; }
-    .num-selector button:hover { background: var(--gold-light); }
-    .num-selector button:focus { outline: 2px solid var(--gold); outline-offset: -2px; }
-    .num-selector span { flex: 1; text-align: center; font-size: 18px; color: var(--brown-dark); font-family: 'Cormorant Garamond', serif; font-style: italic; }
-
-    .sub-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 10px; display: block; }
-    .field-divider { height: 0.5px; background: var(--gold-light); margin: 18px 0; }
-
-    /* Checkbox intolleranze */
-    .check-group { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
-    .check-item { display: flex; align-items: center; gap: 6px; }
-    .check-item input[type="checkbox"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; flex-shrink: 0; }
-    .check-item label { font-size: 13px; color: var(--brown-mid); cursor: pointer; }
-
-    /* Navetta radio */
-    .radio-group { display: flex; gap: 16px; }
-    .radio-item { display: flex; align-items: center; gap: 8px; }
-    .radio-item input[type="radio"] { accent-color: var(--gold); width: 16px; height: 16px; cursor: pointer; }
-    .radio-item label { font-size: 14px; color: var(--brown-mid); cursor: pointer; }
-
-    .scadenza-note {
-      text-align: center; font-size: 13px; color: var(--brown-light);
-      margin-bottom: 0.5rem;
+    .num-selector {
+      display: flex; align-items: center;
+      margin-bottom: 14px;
+      border: 0.5px solid var(--gold-light); border-radius: 8px;
+      overflow: hidden; background: var(--cream);
     }
-    .scadenza-note strong { color: var(--gold); }
+    .num-selector button {
+      background: transparent; border: none;
+      padding: 12px 20px; font-size: 20px; color: var(--gold);
+      cursor: pointer; transition: background 0.2s; line-height: 1;
+    }
+    .num-selector button:hover { background: var(--gold-light); }
+    .num-selector span {
+      flex: 1; text-align: center;
+      font-size: 18px; color: var(--brown-dark);
+      font-family: 'Cormorant Garamond', serif; font-style: italic;
+    }
+    .sub-label {
+      font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 10px; display: block;
+    }
+    .field-divider { height: 0.5px; background: var(--gold-light); margin: 16px 0; }
   </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="storia.html">Storia</a>
   <a href="cerimonia.html">Cerimonia</a>
   <a href="ricevimento.html">Ricevimento</a>
   <a href="programma.html">Programma</a>
-  <a href="arrivare.html">Come arrivare</a>
   <a href="rsvp.html" class="active">RSVP</a>
-  <a href="regalo.html">Lista nozze</a>
+  <a href="regalo.html">Regalo</a>
 </nav>
 
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=80');" role="img" aria-label="Matrimonio"></div>
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?w=1400&q=80');"></div>
   <div class="page-hero-content">
     <p class="page-hero-label">Ci farebbe tanto piacere</p>
     <h1 class="page-hero-title">Sarete con noi?</h1>
@@ -66,17 +71,17 @@
 <section>
   <p class="section-label">RSVP</p>
   <h2 class="section-title">Sarete con noi?</h2>
-  <p class="scadenza-note">Confermate la presenza entro il <strong>30 Aprile 2027</strong></p>
-  <p class="body-text" style="margin-top: 0.5rem;">
-    Così potremo organizzare al meglio ogni dettaglio della serata.
+  <p class="body-text">
+    Ti chiediamo di confermare la tua presenza entro il
+    <span style="color: var(--gold);">30 Aprile 2027</span>
+    così potremo organizzare al meglio ogni dettaglio della serata.
   </p>
 
   <div class="rsvp-box">
     <div id="rsvp-form">
 
-      <label for="rsvp-presenza" class="sub-label">Parteciperete?</label>
-      <select id="rsvp-presenza" aria-label="Conferma partecipazione">
-        <option value="">— seleziona —</option>
+      <select id="rsvp-presenza">
+        <option value="">Parteciperete?</option>
         <option value="si">Sì, saremo presenti con gioia</option>
         <option value="no">No, purtroppo non potremo esserci</option>
       </select>
@@ -84,57 +89,35 @@
       <div id="sezione-ospiti" style="display:none;">
         <div class="field-divider"></div>
 
-        <span class="sub-label" id="label-num">Quante persone parteciperanno?</span>
-        <div class="num-selector" role="group" aria-labelledby="label-num">
-          <button type="button" onclick="cambiaNumero(-1)" aria-label="Diminuisci">−</button>
-          <span id="num-display" aria-live="polite">1</span>
-          <button type="button" onclick="cambiaNumero(+1)" aria-label="Aumenta">+</button>
+        <span class="sub-label">Quante persone parteciperanno?</span>
+        <div class="num-selector">
+          <button type="button" onclick="cambiaNumero(-1)">−</button>
+          <span id="num-display">1</span>
+          <button type="button" onclick="cambiaNumero(+1)">+</button>
         </div>
 
         <span class="sub-label">Nome di ogni partecipante</span>
-        <div id="guest-fields" role="list"></div>
+        <div id="guest-fields"></div>
 
         <div class="field-divider"></div>
 
-        <span class="sub-label">Allergie, intolleranze o esigenze alimentari</span>
-        <div class="check-group" role="group" aria-label="Esigenze alimentari">
-          <div class="check-item"><input type="checkbox" id="ck-veg" value="vegetariano"><label for="ck-veg">Vegetariano</label></div>
-          <div class="check-item"><input type="checkbox" id="ck-vegan" value="vegano"><label for="ck-vegan">Vegano</label></div>
-          <div class="check-item"><input type="checkbox" id="ck-celiaco" value="celiaco"><label for="ck-celiaco">Celiaco</label></div>
-          <div class="check-item"><input type="checkbox" id="ck-pesce" value="pesce"><label for="ck-pesce">Allergia al pesce</label></div>
-          <div class="check-item"><input type="checkbox" id="ck-altro" value="altro"><label for="ck-altro">Altro</label></div>
-        </div>
-        <input type="text" id="rsvp-intolleranze-note" placeholder="Specificare eventuali dettagli (opzionale)" aria-label="Note sulle intolleranze"/>
-
-        <div class="field-divider"></div>
-
-        <!-- BAMBINI -->
-        <span class="sub-label">Bambini</span>
-        <input type="text" id="rsvp-bambini" placeholder="Es: 1 bambino di 4 anni, 1 bambino di 8 anni (opzionale)" aria-label="Bambini e relative età"/>
-
-        <div class="field-divider"></div>
-
-        <!-- NAVETTA — per disattivare: cambia NAVETTA_RSVP_ATTIVA = false nello script -->
-        <div id="navetta-rsvp-field">
-          <span class="sub-label">Servizio navetta</span>
-          <p style="font-size:13px; color:var(--brown-light); margin-bottom:10px;">Desiderate usufruire del servizio navetta?</p>
-          <div class="radio-group" role="group" aria-label="Servizio navetta">
-            <div class="radio-item"><input type="radio" name="navetta" id="nav-si" value="si"><label for="nav-si">Sì</label></div>
-            <div class="radio-item"><input type="radio" name="navetta" id="nav-no" value="no" checked><label for="nav-no">No</label></div>
-          </div>
-          <div class="field-divider"></div>
-        </div>
-
+        <select id="rsvp-intolleranze">
+          <option value="">Intolleranze / preferenze alimentari</option>
+          <option value="nessuna">Nessuna</option>
+          <option value="vegetariano">Vegetariano/a</option>
+          <option value="vegano">Vegano/a</option>
+          <option value="celiaco">Celiaco/a</option>
+          <option value="pesce">Allergia al pesce</option>
+          <option value="altro">Altro (specificare nel messaggio)</option>
+        </select>
       </div>
 
-      <label for="rsvp-note" class="sub-label">Messaggio (opzionale)</label>
-      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un pensiero o comunicarci qualcosa?" aria-label="Messaggio opzionale"></textarea>
-
-      <button class="rsvp-btn" onclick="inviaRSVP()" aria-label="Conferma la presenza">Conferma la presenza</button>
+      <textarea id="rsvp-note" placeholder="Vuoi lasciarci un messaggio? (opzionale)"></textarea>
+      <button class="rsvp-btn" onclick="inviaRSVP()">Conferma la presenza</button>
     </div>
 
-    <div class="rsvp-success" id="rsvp-success" role="alert">
-      Grazie mille!<br>Non vediamo l'ora di festeggiare con voi.
+    <div class="rsvp-success" id="rsvp-success">
+      Grazie mille!<br>Non vediamo l'ora di festeggiare con voi 🤍
     </div>
   </div>
 </section>
@@ -150,26 +133,21 @@
     <a href="cerimonia.html">Cerimonia</a>
     <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
-    <a href="arrivare.html">Come arrivare</a>
-    <a href="regalo.html">Lista nozze</a>
+    <a href="regalo.html">Regalo</a>
   </nav>
 </footer>
 
 <script>
-  // ── CONFIGURAZIONE ─────────────────────────
-  const NAVETTA_RSVP_ATTIVA = true; // cambia a false per nascondere il campo navetta
-  // ───────────────────────────────────────────
-
-  if (!NAVETTA_RSVP_ATTIVA) {
-    document.getElementById('navetta-rsvp-field').style.display = 'none';
-  }
-
   let numPartecipanti = 1;
 
   document.getElementById('rsvp-presenza').addEventListener('change', function() {
     const sez = document.getElementById('sezione-ospiti');
-    sez.style.display = this.value === 'si' ? 'block' : 'none';
-    if (this.value === 'si') aggiornaCampi();
+    if (this.value === 'si') {
+      sez.style.display = 'block';
+      aggiornaCampi();
+    } else {
+      sez.style.display = 'none';
+    }
   });
 
   function cambiaNumero(delta) {
@@ -186,11 +164,9 @@
     for (let i = 0; i < numPartecipanti; i++) {
       const row = document.createElement('div');
       row.className = 'guest-row';
-      row.setAttribute('role', 'listitem');
       row.innerHTML = `
-        <span class="guest-num" aria-hidden="true">${i + 1}.</span>
-        <input type="text" placeholder="Nome e cognome" value="${valori[i] || ''}"
-               aria-label="Partecipante ${i + 1}"/>
+        <span class="guest-num">${i + 1}.</span>
+        <input type="text" placeholder="Nome e cognome" value="${valori[i] || ''}" />
       `;
       container.appendChild(row);
     }
@@ -198,10 +174,10 @@
 
   function inviaRSVP() {
     const presenza = document.getElementById('rsvp-presenza').value;
-    if (!presenza) { alert('Per favore indicate se parteciperete.'); return; }
+    if (!presenza) { alert('Per favore indica se parteciperai.'); return; }
     if (presenza === 'si') {
       const vuoti = Array.from(document.querySelectorAll('#guest-fields input')).some(i => !i.value.trim());
-      if (vuoti) { alert('Per favore inserite il nome di tutti i partecipanti.'); return; }
+      if (vuoti) { alert('Per favore inserisci il nome di tutti i partecipanti.'); return; }
     }
     document.getElementById('rsvp-form').style.display = 'none';
     document.getElementById('rsvp-success').style.display = 'block';

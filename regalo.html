@@ -4,87 +4,100 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Lista nozze — Francesco & Marilena</title>
-  <!-- Privacy: questa pagina non deve essere indicizzata dai motori di ricerca -->
-  <meta name="robots" content="noindex, nofollow"/>
-  <meta name="googlebot" content="noindex, nofollow"/>
   <link rel="stylesheet" href="style.css">
   <style>
     .iban-card {
-      background: var(--white); border: 0.5px solid var(--gold-light);
-      border-radius: 16px; padding: 2.5rem 2rem 2rem; text-align: center;
-      margin-top: 2rem; max-width: 400px; margin-left: auto; margin-right: auto;
+      background: var(--white);
+      border: 0.5px solid var(--gold-light);
+      border-radius: 16px;
+      padding: 2.5rem 2rem 2rem;
+      text-align: center;
+      margin-top: 2rem;
+      max-width: 380px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .iban-name {
-      font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 24px; font-style: italic;
       color: var(--brown-dark); margin-bottom: 0.3rem;
     }
     .iban-label {
       font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 0.8rem; display: block;
+      color: var(--gold); margin-bottom: 0.8rem;
     }
     .iban-code {
-      font-family: 'Jost', sans-serif; font-size: 13px; font-weight: 400;
-      color: var(--brown-mid); background: var(--cream);
-      border: 0.5px solid var(--gold-light); border-radius: 8px;
-      padding: 11px 14px; letter-spacing: 1.5px; margin-bottom: 1rem;
-      word-break: break-all; user-select: all;
+      font-family: 'Jost', sans-serif;
+      font-size: 13px; font-weight: 400;
+      color: var(--brown-mid);
+      background: var(--cream);
+      border: 0.5px solid var(--gold-light);
+      border-radius: 8px;
+      padding: 11px 14px;
+      letter-spacing: 1.5px;
+      margin-bottom: 1rem;
+      word-break: break-all;
     }
     .copy-btn {
-      background: transparent; border: 0.5px solid var(--gold); border-radius: 8px;
-      padding: 11px 20px; font-family: 'Jost', sans-serif;
+      background: transparent;
+      border: 0.5px solid var(--gold);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-family: 'Jost', sans-serif;
       font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
-      color: var(--gold); cursor: pointer; transition: background 0.2s, color 0.2s;
+      color: var(--gold); cursor: pointer;
+      transition: background 0.2s, color 0.2s;
       width: 100%;
     }
-    .copy-btn:hover, .copy-btn.copied { background: var(--gold); color: #fff; }
-    .copy-btn:focus { outline: 2px solid var(--gold); outline-offset: 2px; }
+    .copy-btn:hover { background: var(--gold); color: #fff; }
+    .copy-btn.copied { background: var(--gold); color: #fff; }
   </style>
 </head>
 <body>
+
 <nav>
   <a href="index.html">Home</a>
   <a href="storia.html">Storia</a>
   <a href="cerimonia.html">Cerimonia</a>
   <a href="ricevimento.html">Ricevimento</a>
   <a href="programma.html">Programma</a>
-  <a href="arrivare.html">Come arrivare</a>
   <a href="rsvp.html">RSVP</a>
-  <a href="regalo.html" class="active">Lista nozze</a>
+  <a href="regalo.html" class="active">Regalo</a>
 </nav>
 
+<!-- Hero con sakura giapponese -->
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1400&q=80');" role="img" aria-label="Sakura, Giappone"></div>
+  <div class="page-hero-bg" style="background-image: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?w=1400&q=80');"></div>
   <div class="page-hero-content">
     <p class="page-hero-label">Lista nozze · Viaggio di nozze</p>
     <h1 class="page-hero-title">Un pensiero per noi</h1>
-    <p class="page-hero-sub">Giappone</p>
+    <p class="page-hero-sub">Giappone 🌸</p>
   </div>
 </div>
 
 <section>
   <p class="section-label">Con affetto</p>
-  <h2 class="section-title">La vostra presenza</h2>
+  <h2 class="section-title">Il vostro regalo</h2>
   <p class="body-text">
     La vostra presenza è già il regalo più bello che potete farci.
-    Se però volete contribuire al nostro viaggio di nozze in Giappone,
-    qui sotto trovate l'IBAN — basta copiarlo e incollarlo
-    nella vostra app bancaria.
+    Se però volete contribuire al nostro viaggio di nozze,
+    qui sotto trovate il nostro IBAN — basta copiarlo e incollarlo
+    nella vostra app bancaria per effettuare il bonifico.
   </p>
 
   <div class="iban-card">
     <p class="iban-name">Francesco Di Pasquale</p>
-    <span class="iban-label">IBAN</span>
-    <div class="iban-code" id="iban-f" aria-label="IBAN di Francesco Di Pasquale">IT04T0347501605CC0013137058</div>
-    <button class="copy-btn" onclick="copyIban('iban-f', this)" aria-label="Copia IBAN di Francesco">Copia IBAN</button>
+    <p class="iban-label">IBAN</p>
+    <div class="iban-code" id="iban-f">IT04T0347501605CC0013137058</div>
+    <button class="copy-btn" onclick="copyIban('iban-f', this)">Copia IBAN</button>
   </div>
 </section>
 
 <div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
 
 <section style="padding-top: 0; text-align: center;">
-  <p class="body-text" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--brown-mid); line-height: 1.8;">
-    "Con voi accanto, ogni sogno diventa possibile — anche quello di perderci
-    tra i fiori di ciliegio del Giappone."
+  <p class="body-text" style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 18px; color: var(--brown-mid);">
+    "Con voi accanto, ogni sogno diventa possibile."
   </p>
 </section>
 
@@ -99,7 +112,6 @@
     <a href="cerimonia.html">Cerimonia</a>
     <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
-    <a href="arrivare.html">Come arrivare</a>
     <a href="rsvp.html">RSVP</a>
   </nav>
 </footer>
@@ -108,20 +120,12 @@
   function copyIban(id, btn) {
     const text = document.getElementById(id).textContent.trim();
     navigator.clipboard.writeText(text).then(() => {
-      btn.textContent = 'Copiato';
+      btn.textContent = 'Copiato! ✓';
       btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copia IBAN'; btn.classList.remove('copied'); }, 2000);
-    }).catch(() => {
-      // Fallback per browser che non supportano clipboard API
-      const el = document.getElementById(id);
-      const range = document.createRange();
-      range.selectNode(el);
-      window.getSelection().removeAllRanges();
-      window.getSelection().addRange(range);
-      document.execCommand('copy');
-      btn.textContent = 'Copiato';
-      btn.classList.add('copied');
-      setTimeout(() => { btn.textContent = 'Copia IBAN'; btn.classList.remove('copied'); }, 2000);
+      setTimeout(() => {
+        btn.textContent = 'Copia IBAN';
+        btn.classList.remove('copied');
+      }, 2000);
     });
   }
 </script>
