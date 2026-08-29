@@ -4,51 +4,25 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Cerimonia — Francesco & Marilena</title>
+  <meta name="description" content="La cerimonia di Francesco e Marilena al Duomo di Ortigia, Siracusa, il 17 giugno 2027."/>
+  <meta property="og:title" content="Cerimonia — Francesco & Marilena"/>
+  <meta property="og:description" content="Francesco & Marilena · 17 giugno 2027 · Duomo di Ortigia, Siracusa"/>
   <link rel="stylesheet" href="style.css">
-  <style>
-    .location-section { padding: 3rem 2.5rem 2rem; }
-    .location-img-hero {
-      width: 100%; height: 280px; object-fit: cover;
-      border-radius: 16px; display: block; margin: 1.2rem 0;
-    }
-    .location-info {
-      background: var(--white); border: 0.5px solid var(--gold-light);
-      border-radius: 14px; padding: 1.6rem; margin-top: 1.2rem;
-    }
-    .location-info-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-style: italic; color: var(--brown-dark); margin-bottom: 10px;
-    }
-    .location-info-row {
-      display: flex; gap: 10px; align-items: flex-start;
-      margin-bottom: 8px; font-size: 13px; color: var(--brown-mid);
-    }
-    .location-info-row span:first-child { color: var(--gold); min-width: 18px; }
-    .map-btn {
-      display: inline-block; margin-top: 14px;
-      background: var(--gold); color: var(--white);
-      text-decoration: none; border-radius: 8px;
-      padding: 10px 24px; font-size: 10px; letter-spacing: 2px;
-      text-transform: uppercase; transition: background 0.2s;
-    }
-    .map-btn:hover { background: #b0804f; }
-    @media (max-width: 500px) { .location-section { padding: 2.5rem 1.5rem 1.5rem; } }
-  </style>
 </head>
 <body>
-
 <nav>
   <a href="index.html">Home</a>
   <a href="storia.html">Storia</a>
   <a href="cerimonia.html" class="active">Cerimonia</a>
   <a href="ricevimento.html">Ricevimento</a>
   <a href="programma.html">Programma</a>
+  <a href="arrivare.html">Come arrivare</a>
   <a href="rsvp.html">RSVP</a>
-  <a href="regalo.html">Regalo</a>
+  <a href="regalo.html">Lista nozze</a>
 </nav>
 
 <div class="page-hero">
-  <div class="page-hero-bg" style="background-image: url('Duomo.jpg');"></div>
+  <div class="page-hero-bg" style="background-image: url('Duomo.jpg');" role="img" aria-label="Duomo di Ortigia, Siracusa"></div>
   <div class="page-hero-content">
     <p class="page-hero-label">La cerimonia</p>
     <h1 class="page-hero-title">Duomo di Ortigia</h1>
@@ -56,11 +30,11 @@
   </div>
 </div>
 
-<div class="location-section">
+<section>
   <p class="section-label">La cerimonia</p>
   <h2 class="section-title">Duomo di Ortigia</h2>
 
-  <img class="location-img-hero" src="Duomo.jpg" alt="Piazza del Duomo di Ortigia, Siracusa" />
+  <img class="location-img-hero" src="Duomo.jpg" alt="Piazza del Duomo di Ortigia, Siracusa" loading="lazy"/>
 
   <p class="body-text" style="margin-top: 1.2rem;">
     Uno dei luoghi più suggestivi della Sicilia, incastonato nella meravigliosa
@@ -68,14 +42,14 @@
     Vi aspettiamo qui per il momento più emozionante della giornata.
   </p>
 
-  <div class="location-info">
-    <p class="location-info-title">Cattedrale di Siracusa</p>
-    <div class="location-info-row"><span>✦</span><span>Piazza Duomo, Ortigia · Siracusa</span></div>
-    <div class="location-info-row"><span>✦</span><span>Cerimonia ore 16:30</span></div>
-    <div class="location-info-row"><span>✦</span><span>Si prega di essere presenti almeno 15 minuti prima</span></div>
-    <a class="map-btn" href="https://maps.google.com/?q=Duomo+di+Ortigia+Siracusa" target="_blank">Apri in Google Maps</a>
+  <div class="info-box">
+    <p class="info-box-title">Cattedrale della Natività di Maria Santissima</p>
+    <div class="info-row"><span>✦</span><span>Piazza Duomo, Ortigia · Siracusa</span></div>
+    <div class="info-row"><span>✦</span><span>Cerimonia ore <strong>16:30</strong></span></div>
+    <div class="info-row"><span>✦</span><span>Vi chiediamo di essere presenti almeno 15 minuti prima dell'inizio</span></div>
+    <a class="map-btn" href="https://maps.google.com/?q=Duomo+di+Ortigia+Siracusa" target="_blank" rel="noopener" aria-label="Apri il Duomo di Ortigia in Google Maps">Apri in Google Maps</a>
   </div>
-</div>
+</section>
 
 <div class="divider"><div class="div-line"></div><div class="div-dot"></div><div class="div-line"></div></div>
 
@@ -87,8 +61,9 @@
     <a href="storia.html">Storia</a>
     <a href="ricevimento.html">Ricevimento</a>
     <a href="programma.html">Programma</a>
+    <a href="arrivare.html">Come arrivare</a>
     <a href="rsvp.html">RSVP</a>
-    <a href="regalo.html">Regalo</a>
+    <a href="regalo.html">Lista nozze</a>
   </nav>
 </footer>
 </body>
